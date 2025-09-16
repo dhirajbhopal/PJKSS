@@ -91,22 +91,28 @@ body {
 }
 </style>
 
+<style>
+table, th, td {
+  border: 0px solid black;
+}
+</style>
+
 </head>
   <body background="{% static 'images/bg.jpg' %}" 
-  style="background-repeat:no-repeat;background-size:cover;">
-  <div style="overflow-x:auto;">
-  <table class="container-fluid bg-info" align="center">
+  style="background-repeat:repeat;background-size:cover;">
+  <div style="overflow-y:auto;">
+  <table class="container-fluid bg-info">
     <tr>
       <td><a href="/"><img src="{% static 'images/PATEL_LOGO.png' %}" height="150px"></a></td>
-      <td style="color: white; font-size: 30px; font-weight: bolder; text-align: center; margin: 10px;">PATEL JAN KALYAN SEVA SAMITI <br> पटेल जन कल्याण सेवा समिति<br>
-        <a style="color: red; font-size: 15px; font-weight: bolder; text-align: center; margin:10px;"> Patel Asmarak, GT Road Bus Stand, Mohanbigha, Dehri On Sone, Rohtas Bihar (821307) </a></td>
-      <td><a><img src="{% static 'images/Azadi-Ka-Amrit-Mahotsav-Logo.png' %}" height="100px"></a></td>
-      <td><a><img src="{% static 'images/gandiji_logo.png' %}" height="100px"></a></td>
+      <td style="color: white; font-size: 30px; font-weight: bolder; text-align: center;">PATEL JAN KALYAN SEVA SAMITI <br> पटेल जन कल्याण सेवा समिति<br>
+        <a style="color: red; font-size: 15px; text-align:left;"> Patel Asmarak, GT Road Bus Stand, Mohanbigha, Dehri On Sone, Rohtas Bihar (821307)</a></td>
+      <td><a><img src="{% static 'images/Azadi-Ka-Amrit-Mahotsav-Logo.png' %}" height="80px" style="align-items:left;"></a></td>
+      <td><a><img src="{% static 'images/gandiji_logo.png' %}" height="80px"></a></td>
       <td><a href="{% static 'images/MNS_Pramita.png' %}"><img src="{% static 'images/MNS_Pramita.png' %}" height="150px"></a></td>
 </table>
   </div>
 
-<div class="topnav navbartop" id="myTopnav">
+<div class="topnav" id="myTopnav">
   <a href="/" class="active"><img src="{% static 'images/PATEL_LOGO.png' %}" height="23px"><i class="fa fa-home faicon" aria-hidden="true"></i> Home</a>
   <a href="{% url 'contact' %}"><i class="fa fa-phone faicon" aria-hidden="true"></i> Contact Us</a>
   <a href="{% url 'course' %}"><i class="fa fa-book" aria-hidden="true"></i> Vision</a>
@@ -239,27 +245,25 @@ function myFunction() {
       <div class="p-1 rounded-2 text-center"> 
         <h1 style="color: green;"> <i style="color:darkred;" class="fa fa-bullhorn" aria-hidden="true"></i> News & Committee Updates </h1>
          <hr style="border-width:5px; size: 20px; color:red;">
-         <!---
-        <marquee direction="up" scrollamount="3" onmouseover="this.stop();"onmouseout="this.start();">
+        <marquee direction="up" scrollamount="1" onmouseover="this.stop();"onmouseout="this.start();">
          <ol>
-            <li style="color:green; font-size: 20px;">1st Semester Result will decler on 05-Oct-22 at 11:30AM <a href="viewresultweb" 
-              style="color: red;"> View Result</a> </li><br>
-            <li style="color:green; font-size: 20px;">3rd Semester Result will decler on 06-Oct-22 at 11:30PM </li>
+            <li style="color:green; font-size: 20px;">आज 15 अगस्त 2025 को सुबह 10:30 बजे पटेल अस्मारक डेहरी में धूम धाम से तिरंगा झंडा फहराया जाएगा, आप सभी से निवेदन है कि समय पे आकर आजादी का पर्व धूम धाम से मनाएं l<a href="" style="color: red;"></a> </li>
+            <!--<li style="color:green; font-size: 20px;">3rd Semester Result will decler on 06-Oct-22 at 11:30PM </li>
             <li style="color:green; font-size: 20px;">5th Semester Result will decler on 07-Oct-22 at 11:30AM</li>
             <li style="color:green; font-size: 20px;">7th Semester Result will decler on 08-Oct-22 at 11:30AM</li>
             <li style="color:red; font-size: 20px;"> New Addimission is Going On</li>
             <li style="color:red; font-size: 20px;">Schollership form last date is 10-Dec-22</li>
             <li style="color:green; font-size: 20px;">New Addimission is Going On</li>
+          -->
     </ol>
-  </marquee>  
-  --->
+  </marquee>
  </div>
         
         
           </div>
     <div class="col-6 p-2">
       <div class="p-1">
-        <h1 style="color:red;"> Founder’s Message </h1>
+        <h2 style="color:red;"> Founder’s Message </h2>
         <hr style="border-width:5px; size: 20px; color:red;">
         <img src="{% static 'images/modnarayanfounder.jpeg' %}" class="rounded-4 p-1" align="left" height="200px" style="padding:0px; margin-left:0px;">
         
@@ -268,46 +272,111 @@ Ashish Sojatia
 Group Chairman
 </div>
 </div>
-        </div>
-        <div class="p-0 text-center">
-        <h1 style="color: red;">Gallery</h1>
+</div>
+   <!-------------Image Section   Image ----------------------->
+
+        <div class="p-0 text-center m-0">
+        <h2 style="color: red;">Gallery</h2>
         <hr style="border-width:10px; size: 20px; color:darkgreen;">
-        <div style="overflow-x:auto;">
-  <table class=" bg-warning" align="center">
-    <tr>
-      <td> <a href="{% static 'images/31jan_BrahmanBhoj/1.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/1.jpg' %}" height="150px;" width="245px"class="rounded-4"></a></td>
-      <td> <a href="{% static 'images/31jan_BrahmanBhoj/2.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/2.jpg' %}" height="150px;" width="245px"class="rounded-4"></a></td>
-      <td> <a href="{% static 'images/31jan_BrahmanBhoj/3.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/3.jpg' %}" height="150px;" width="280px"class="rounded-4"></a></td>
-      <td> <a href="{% static 'images/31jan_BrahmanBhoj/4.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/4.jpg' %}" height="150px;" width="245px"class="rounded-4"></a></td>
-      <td> <a href="{% static 'images/31jan_BrahmanBhoj/5.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/5.jpg' %}" height="150px;" width="245px"class="rounded-4"></a></td>
-      <td> <a href="{% static 'images/31jan_BrahmanBhoj/6.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/6.jpg' %}" height="150px;" width="245px"class="rounded-4"></a></td>
-      </tr>
-       <tr>
-      <td> <a href="{% static 'images/31jan_BrahmanBhoj/7.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/7.jpg' %}" height="150px;" width="245px"class="rounded-4"></a></td>
-      <td> <a href="{% static 'images/31jan_BrahmanBhoj/8.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/8.jpg' %}" height="150px;" width="245px"class="rounded-4"></a></td>
-      <td> <a href="{% static 'images/31jan_BrahmanBhoj/9.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/9.jpg' %}" height="150px;" width="280px"class="rounded-4"></a></td>
-      <td> <a href="{% static 'images/31jan_BrahmanBhoj/10.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/10.jpg' %}" height="150px;" width="245px"class="rounded-4"></a></td>
-      <td> <a href="{% static 'images/31jan_BrahmanBhoj/11.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/11.jpg' %}" height="150px;" width="245px"class="rounded-4"></a></td>
-      <td> <a href="{% static 'images/31jan_BrahmanBhoj/12.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/12.jpg' %}" height="150px;" width="245px"class="rounded-4"></a></td>
-      </tr>
-        <tr>
-      <td> <a href="{% static 'images/31jan_BrahmanBhoj/13.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/13.jpg' %}" height="150px;" width="245px"class="rounded-4"></a></td>
-      <td> <a href="{% static 'images/31jan_BrahmanBhoj/14.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/14.jpg' %}" height="150px;" width="245px"class="rounded-4"></a></td>
-      <td> <a href="{% static 'images/31jan_BrahmanBhoj/15.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/15.jpg' %}" height="150px;" width="280px"class="rounded-4"></a></td>
-      <td> <a href="{% static 'images/31jan_BrahmanBhoj/16.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/16.jpg' %}" height="150px;" width="245px"class="rounded-4"></a></td>
-      <td> <a href="{% static 'images/31jan_BrahmanBhoj/17.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/17.jpg' %}" height="150px;" width="245px"class="rounded-4"></a></td>
-      <td> <a href="{% static 'images/31jan_BrahmanBhoj/18.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/18.jpg' %}" height="150px;" width="245px"class="rounded-4"></a></td>
-      </tr>
-        <tr>
-      <td> <a href="{% static 'images/31jan_BrahmanBhoj/19.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/19.jpg' %}" height="150px;" width="245px"class="rounded-4"></a></td>
-      <td> <a href="{% static 'images/31jan_BrahmanBhoj/20.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/20.jpg' %}" height="150px;" width="245px"class="rounded-4"></a></td>
-      <td> <a href="{% static 'images/31jan_BrahmanBhoj/21.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/21.jpg' %}" height="150px;" width="280px"class="rounded-4"></a></td>
-      <td> <a href="{% static 'images/31jan_BrahmanBhoj/22.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/22.jpg' %}" height="150px;" width="245px"class="rounded-4"></a></td>
-      <td> <a href="{% static 'images/31jan_BrahmanBhoj/23.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/23.jpg' %}" height="150px;" width="245px"class="rounded-4"></a></td>
-      <td> <a href="{% static 'images/31jan_BrahmanBhoj/24.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/24.jpg' %}" height="150px;" width="245px"class="rounded-4"></a></td>
-      </tr>
-    </table>
         </div>
+
+<div class="accordion p-0 m-0" id="accordionExample">
+  <div class="accordion-item bg-transparent border-0">
+      <button class="accordion-button p-0 m-1 w-50" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <img src="{% static 'images/15-August-25/1.jpeg' %}" height="50px;" width="80px"class="rounded-4"> 
+        <img src="{% static 'images/15-August-25/2.jpeg' %}" height="50px;" width="80px"class="rounded-4"> 
+         &nbsp Click here for 15-August-2025 More Images  
+      </button>
+        <div id="collapseTwo" class="accordion-collapse collapse hide" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <a href="{% static 'images/15-August-25/1.jpeg' %}"><img src="{% static 'images/15-August-25/1.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
+        <a href="{% static 'images/15-August-25/2.jpeg' %}"><img src="{% static 'images/15-August-25/2.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
+        <a href="{% static 'images/15-August-25/3.jpeg' %}"><img src="{% static 'images/15-August-25/3.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
+        <a href="{% static 'images/15-August-25/4.jpeg' %}"><img src="{% static 'images/15-August-25/4.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
+        <a href="{% static 'images/15-August-25/5.jpeg' %}"><img src="{% static 'images/15-August-25/5.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
+        <a href="{% static 'images/15-August-25/6.jpeg' %}"><img src="{% static 'images/15-August-25/6.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
+
+        <a href="{% static 'images/15-August-25/7.jpeg' %}"><img src="{% static 'images/15-August-25/7.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
+        <a href="{% static 'images/15-August-25/8.jpeg' %}"><img src="{% static 'images/15-August-25/8.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
+        <a href="{% static 'images/15-August-25/9.jpeg' %}"><img src="{% static 'images/15-August-25/9.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
+        <a href="{% static 'images/15-August-25/10.jpeg' %}"><img src="{% static 'images/15-August-25/10.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
+        <a href="{% static 'images/15-August-25/11.jpeg' %}"><img src="{% static 'images/15-August-25/11.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
+        <a href="{% static 'images/15-August-25/12.jpeg' %}"><img src="{% static 'images/15-August-25/12.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
+
+        <a href="{% static 'images/15-August-25/13.jpeg' %}"><img src="{% static 'images/15-August-25/13.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
+        <a href="{% static 'images/15-August-25/14.jpeg' %}"><img src="{% static 'images/15-August-25/14.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
+        <a href="{% static 'images/15-August-25/15.jpeg' %}"><img src="{% static 'images/15-August-25/15.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
+        <a href="{% static 'images/15-August-25/16.jpeg' %}"><img src="{% static 'images/15-August-25/16.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
+        <a href="{% static 'images/15-August-25/17.jpeg' %}"><img src="{% static 'images/15-August-25/17.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
+        <a href="{% static 'images/15-August-25/18.jpeg' %}"><img src="{% static 'images/15-August-25/18.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
+
+   <a href= "{% static 'videos/15-August-25/v1.mp4' %}"> <video width="320" height="240" controls>
+  <source src="{% static 'videos/15-August-25/v1.mp4' %}" type="video/mp4">
+  <source src="movie.ogg" type="video/ogg">
+</video>
+</a>
+
+<a href= "{% static 'videos/15-August-25/v2.mp4' %}"> <video width="320" height="240" controls>
+  <source src="{% static 'videos/15-August-25/v2.mp4' %}" type="video/mp4">
+  <source src="movie.ogg" type="video/ogg">
+</video>
+</a>
+<a href= "{% static 'videos/15-August-25/v3.mp4' %}"> <video width="320" height="240" controls>
+  <source src="{% static 'videos/15-August-25/v3.mp4' %}" type="video/mp4">
+  <source src="movie.ogg" type="video/ogg">
+</video>
+</a>
+<a href= "{% static 'videos/15-August-25/v4.mp4' %}"> <video width="320" height="240" controls>
+  <source src="{% static 'videos/15-August-25/v4.mp4' %}" type="video/mp4">
+  <source src="movie.ogg" type="video/ogg">
+</video>
+</a>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="accordion p-0 m-0" id="accordionExample">
+  <div class="accordion-item bg-transparent border-0">
+      <button class="accordion-button p-0 m-1 w-50" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <img src="{% static 'images/31jan_BrahmanBhoj/1.jpg' %}" height="50px;" width="80px"class="rounded-4"> 
+        <img src="{% static 'images/31jan_BrahmanBhoj/21.jpg' %}" height="50px;" width="80px"class="rounded-4">
+         &nbsp Click here for 31-Jan-2025 More Images  
+      </button>
+        <div id="collapseOne" class="accordion-collapse collapse hide" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <a href="{% static 'images/31jan_BrahmanBhoj/1.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/1.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
+      <a href="{% static 'images/31jan_BrahmanBhoj/2.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/2.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
+      <a href="{% static 'images/31jan_BrahmanBhoj/3.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/3.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
+       <a href="{% static 'images/31jan_BrahmanBhoj/4.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/4.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
+       <a href="{% static 'images/31jan_BrahmanBhoj/5.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/5.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
+      <a href="{% static 'images/31jan_BrahmanBhoj/6.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/6.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
+     
+       <a href="{% static 'images/31jan_BrahmanBhoj/7.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/7.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
+      <a href="{% static 'images/31jan_BrahmanBhoj/8.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/8.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
+      <a href="{% static 'images/31jan_BrahmanBhoj/9.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/9.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
+    <a href="{% static 'images/31jan_BrahmanBhoj/10.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/10.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
+    <a href="{% static 'images/31jan_BrahmanBhoj/11.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/11.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
+    <a href="{% static 'images/31jan_BrahmanBhoj/12.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/12.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
+
+    <a href="{% static 'images/31jan_BrahmanBhoj/13.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/13.jpg' %}" height="150px;" width="269px"class="rounded-4"></a></td>
+    <a href="{% static 'images/31jan_BrahmanBhoj/14.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/14.jpg' %}" height="150px;" width="269px"class="rounded-4"></a></td>
+     <a href="{% static 'images/31jan_BrahmanBhoj/15.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/15.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
+      <a href="{% static 'images/31jan_BrahmanBhoj/16.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/16.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
+      <a href="{% static 'images/31jan_BrahmanBhoj/17.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/17.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
+      <a href="{% static 'images/31jan_BrahmanBhoj/18.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/18.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
+      <a href="{% static 'images/31jan_BrahmanBhoj/19.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/19.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
+      <a href="{% static 'images/31jan_BrahmanBhoj/20.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/20.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
+      <a href="{% static 'images/31jan_BrahmanBhoj/21.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/21.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
+       <a href="{% static 'images/31jan_BrahmanBhoj/22.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/22.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
+      <a href="{% static 'images/31jan_BrahmanBhoj/23.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/23.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
+      <a href="{% static 'images/31jan_BrahmanBhoj/24.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/24.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
+      </div>
+    </div>
+  </div>
+
+
+
   {% endblock %}
 
  {% block register %} {% endblock %}

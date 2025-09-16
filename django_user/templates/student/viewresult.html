@@ -16,12 +16,12 @@
 </style>
 
 <div class="container align-item-center pagebreak">
-	<br>
+  <br>
   <form action='marksheet' method="POST" name="f1" onsubmit="return validation();">
       {% csrf_token %}
 <select name="semester" class="custom-select custom-select-sm">
-	<option id="sel" selected></option>
-	{% for i in details %}
+  <option id="sel" selected></option>
+  {% for i in details %}
   <script type="text/javascript">
     var a="{{i.semester}}";
     var rolls="{{i.rollno}}";
@@ -56,7 +56,7 @@ function validation()
   </script>
 
 {% for i in marks %}
-<div  class="pagebreak" align="center" id="printableArea">
+<div  class="pagebreak" align="center" id="GFG">
   <style type="text/css">
 #myborder
 {
@@ -82,7 +82,7 @@ width:355px;
       <td align="center" style="padding:5px;">
 
 <table width="100%" >
-<tr><td colspan="2" class="mytop"><img src="{% static 'images/cybromlogo.webp' %}" height="50px;">Cybrom Technology</td></tr>
+<tr><td colspan="2" class="mytop"><img src="{% static 'images/PATEL_LOGO.png' %}" height="50px;">Cybrom Technology</td></tr>
 {% for i in details2 %}
 <tr><td  class="mytop">NAME:-</td>
 <td  class="mytop">{{i.name}} {{i.lastname}}</td></tr>
@@ -100,6 +100,7 @@ width:355px;
 </table>
 
 <table width="100%">
+  <tr>
 <td id="myborder" rowspan="2" align="center">CODE</td>
 <td id="myborder2" rowspan="2" align="center">Subject</td>
 <td id="myborder" colspan="4" align="center">MARKS OBTAINED</td>
@@ -178,25 +179,23 @@ width:355px;
                         <td colspan="0" align="right" style="align-items: right; padding-top:20px; padding-bottom: 35px;">Authorized Seal and Signature &#160 &#160</td>
                       </tr>
                          </table>
-                       </tr>
-                       </td>
                          </table>
                          </div> 
-                         <a href="javascript:void(0);" class="btn btn-outline-danger m-3" onclick="printPageArea('printableArea')">Print</a>
+                         <a href="javascript:void(0);" class="btn btn-outline-danger m-3" onclick="printDiv()">Print</a>
                        </div>
                        <br>
                   
+                  
 
-                  <script type="text/javascript">
-                    
-                    function printPageArea(areaID){
-    var printContent = document.getElementById(areaID).innerHTML;
-    var originalContent = document.body.innerHTML;
-    document.body.innerHTML = printContent;
-    window.print();
-    document.body.innerHTML = originalContent;
+    <script type="text/javascript">
+      function printDiv() {
+     var printContents = document.getElementById("GFG").innerHTML;
+     document.body.innerHTML = printContents;
+     window.print();
 }
-                  </script>
+    </script>
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>

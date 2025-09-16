@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Sign Page{% endblock title %}
+{% block title %}Sigin{% endblock title %}
 {% block content %} 
   <script type="text/javascript" src="{% static 'jquery.js' %}"></script>
   <script type="text/javascript">
@@ -288,8 +288,8 @@ function Generate() {
           <div class="card-body p-md-1">
             <div class="row justify-content-center">
               <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                <p class="text-center h1 fw-bold mb-1 mx-1 mx-md-1 mt-1 pb-2" style="color: red;">Please contact your Admin</p>
-                <!--<form name="f1" action="{% url 'signuptask' %}" method="GET" enctype="multipart/form-data" onsubmit="return validation();" class="mx-1 mx-md-4">
+                
+                <form name="f1" action="{% url 'signuptask' %}" method="GET" enctype="multipart/form-data" onsubmit="return validation();" class="mx-1 mx-md-4">
                   {% csrf_token %}
                    <div class="d-flex flex-row align-items-center mb-0">
                     <div class="form-outline flex-fill mb-2">
@@ -356,7 +356,7 @@ function Generate() {
                     </div>
                   </div>
 
-                  -----Captcha------  
+                 <! -----Captcha------> 
                    <div class="d-flex flex-row align-items-center">
                     <div class="form-outline flex-fill mb-2">
                       <label class="form-label" for="form3Example1c"style="color:green;"></label><label class="form-label" for="form3Example1c" style="color:red;">&#160</label>
@@ -384,9 +384,9 @@ function Generate() {
                 </form>
               </div>
               <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-                <img src="{% static 'images/signup.jpeg' %}" class="img-fluid" alt="Sample image">
+                <img src="{% static 'images/PATEL_LOGO.png' %}" class="img-fluid" alt="Sample image">
                 <input type="text" id="otprec" value="12356" class="display-block" readonly="readonly" style="color:white; width: 1px; border: 0px solid white;">
-              -->
+
               </div>
             </div>
           </div>

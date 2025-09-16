@@ -16,7 +16,7 @@ class facultyAdmin(admin.ModelAdmin):
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     fieldsets = (
-        (None,{"fields": ("username","email", "password")}),
+        (None,{"fields": ("username","email","password")}),
         (("Personal info"), {"fields": ("first_name", "last_name","role","image","rollno")}),
         (
             ("Permissions"),
@@ -46,6 +46,7 @@ class UserAdmin(admin.ModelAdmin):
     search_fields = ("email",)
     ordering = ("email",)
     filter_horizontal = ("groups", "user_permissions",)
+    readonly_fields = ('password','email','username')
 
 
 @admin.register(studentdetails)

@@ -55,7 +55,7 @@ class showstu(View):
             studetail=studentdetails.objects.all().exclude(name="")
             return render(request,'adminrole/studentinfo.html',{'studetail':studetail})
 
-@login_required
+"""@login_required
 def Imageupdate(req):
     try:
         email=req.POST.get("email")
@@ -63,9 +63,10 @@ def Imageupdate(req):
         img2.image=req.FILES['image']
         img2.save()
         msg="Profile photo changed Successfully"
-        return render(req,'base.html',{"msg":msg})
-    except Exception as ex:       
         return redirect('/')
+        #return render(req,'base.html',{"msg":msg})
+    except Exception as ex:       
+        return redirect('/')"""
 
 class mysingup(View):
 
@@ -75,6 +76,33 @@ class mysingup(View):
         except Exception as ex:
             msg="signup form not found"
             return render(request,'base.html',{'msg':msg})
+
+# delete old profile after uploading new profile
+
+@login_required
+def Imageupdate(req):
+    try:
+        email = req.POST.get("email")
+        img2 = User.objects.get(email=email)
+
+        # ---- delete previous image if exists ----
+        if img2.image:   # assuming your User model has an image field
+            if os.path.isfile(img2.image.path):
+                os.remove(img2.image.path)
+
+        # ---- save new image ----
+        img2.image = req.FILES['image']
+        img2.save()
+
+        msg = "Profile photo changed Successfully"
+        messages.success(req, msg)
+        return redirect('/')
+    except Exception as ex:
+        print("Error while updating image:", ex)
+        messages.error(req, "Something went wrong while updating image")
+        return redirect('/')
+
+
 
 class addstudent(View):
 
@@ -86,7 +114,7 @@ class forgotpassword(View):
     def get(self,request):
         return render(request,'commons/forgotpass.html')
 
-"""class signuptask(View):
+class signuptask(View):
 
     def get(self,request):
         code = 0
@@ -102,30 +130,34 @@ class forgotpassword(View):
             ob.password=encryptedpassword
             ob.gender=request.GET.get("gender")
             ob2.email=request.GET.get("emailid")
-            ob2.first_name=request.GET.get("name")
-            ob2.last_name=request.GET.get("name1")
+            ob2.name=request.GET.get("name")
+            ob2.lastname=request.GET.get("name1")
+            ob2.gender=request.GET.get("gender")
+            ob2.mobileno=request.GET.get("mobileno")
             ob.save()
             ob2.save()
         except IntegrityError as ex:          
             code = 1
-            #return HttpResponse("Email id Already exist")
+            messages.success(request,'Email is Already Registered! need to reset password')
+            return redirect('login')
         except Exception as ex:       
             code = 2
-            #return HttpResponse("Email id Not Found")
-        return redirect("/cheksignup?err="+str(code))"""
+            messages.success(request,'Email id does not exist !')
+            return render(req,'commons/signup.html')
+        return redirect("/cheksignup?err="+str(code))
 
 
 def cheksignup(req):
     code = req.GET.get("err")
     msg = ""
     if code=="0":
-        msg="Registeration Done Successfully"
-        return redirect('login/',{"msg":msg})
+        messages.success(req,"Registeration Done Successfully")
+        return redirect('login')
     if code=="1":
-        msg="Phone or Email is Already Registered !"        
+        messages.success(req,'Email is Already Registered !')      
     if code=="2":
-        msg="Registeration Failed !"        
-    return render(req,'commons/signup.html',{"msg":msg})  
+        messages.success(req,'Registeration Failed !')     
+    return render(req,'commons/signup.html')
 
 def generateOTP(n):
     range_start = 10**(n-1)
@@ -136,7 +168,7 @@ def generateOTP(n):
 def sendmail(email,otp):
     try:
         print("mail iniitializing")
-        message ="""<html><body><h1 style='color:red'>Welcome to Cybrom</h1> <hr>Hello Mr. {0},<br><br>
+        message ="""<html><body><h1 style='color:red'>PJKSS Dehri</h1> <hr>Hello Mr. {0},<br><br>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         Please enter otp to complete your registration <b><br><br>
         Your OTP is :- <span style='color:red'>  {1} </spna> </b> please don't share to anyone.<br>
@@ -929,7 +961,7 @@ def logoutUser(request):
     return redirect('login')
 
 
-class signuptask(View):
+"""class signuptask(View):
 
     def get(self,request):
         encryptedpassword=make_password(request.GET['password'])
@@ -947,4 +979,7 @@ class signuptask(View):
         ob2.last_name=request.GET.get("name1")
         ob2.save()
         ob.save()
-        return redirect("/")
+        return redirect("/")"""
+
+
+

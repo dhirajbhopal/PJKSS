@@ -4,6 +4,8 @@ import datetime
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser, AbstractBaseUser
 from django.db import models
+from django.contrib.auth.models import User
+
 #from import_export import resources
 
 
@@ -11,10 +13,10 @@ from django.db import models
 
 
 def filepathadmin(req,filename):
-   old_filename = filename
-   timeNow = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
-   filename= "%s%s" % (timeNow,old_filename)
-   return os.path.join('uploads/',filename)
+    old_filename = filename
+    timeNow = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+    filename= "%s%s" % (timeNow,old_filename)
+    return os.path.join('uploads/',filename)
   
 
 
@@ -51,7 +53,7 @@ class User(AbstractUser):
     role=models.CharField(max_length=15,null=True,blank=True)
     mobileno=models.CharField(max_length=15,null=True,blank=True)
     gender=models.CharField(max_length=15,null=True,blank=True)
-    rollno=models.CharField(max_length=20,null=False,blank=True,unique=True)
+    rollno=models.CharField(max_length=20,null=True,blank=True,unique=True)
     objects = CustomUserManager()
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]
@@ -71,7 +73,7 @@ class studentdetails(models.Model):
     dob=models.DateField(blank=True,null=True)
     doa=models.DateField(blank=True,null=True)
     address=models.CharField(max_length=200,blank=True)
-    rollno=models.CharField(max_length=20,null=False,blank=True,unique=True)
+    rollno=models.CharField(max_length=20,null=True,blank=True,unique=True)
 
     def __str__(self):
         return self.email
@@ -119,3 +121,6 @@ class studentfee(models.Model):
 
     def __str__(self):
         return self.rollno
+
+
+
