@@ -43,7 +43,7 @@ Back
                       <tr id="td1" border="2" align="center">
                         <form action="editmark" method="POST">
                           {% csrf_token %}
-                          <input type="hidden" name="ids" value="{{i.id}}">
+                        <input type="hidden" name="ids" value="{{i.id}}">
                         <td><input  disabled type="text" name="rollno" value="{{i.rollno}}"></td>
                         <td> <input  type="text" name="branch" value="{{i.branch}}"></td>
                         <td> <input type="text" name="semester" value="{{i.semester}}" style="width: 50px;"></td>

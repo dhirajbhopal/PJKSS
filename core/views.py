@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from django.urls import reverse
 from django.views import View
-from core.models import User,studentdetails,studentmarks,studentfee
+from core.models import User,studentdetails,studentmarks,studentfee,letterserialno
 from django.conf import settings
 from django.contrib import messages
 from django.db.utils import IntegrityError
@@ -831,6 +831,7 @@ def feeupload(req):
     return render(req,'adminrole/uploadfee.html')
 
 
+
 def exceluploadfee(request):
     try:
         if request.method == 'POST' and request.FILES['myfile']:      
@@ -981,5 +982,65 @@ def logoutUser(request):
         ob.save()
         return redirect("/")"""
 
+
+def addserialno(req):
+    return render(req,'adminrole/addserialno.html')
+
+@login_required
+def letterno(request):
+    try:
+        if request.method == 'POST' and request.FILES['myfile']:      
+            myfile = request. FILES['myfile']
+            fs = FileSystemStorage()
+            filename = fs.save(myfile.name, myfile)
+            uploaded_file_url = fs.url(filename)              
+            empexceldata = pd.read_excel(filename)        
+            dbframe = empexceldata
+            for dbframe in dbframe.itertuples():
+                obj = letterserialno.objects.create(serialno=dbframe.serialno,issuername=dbframe.issuername,issuedto=dbframe.issuedto,
+                    subject=dbframe.subject,issuedate=dbframe.issuedate)           
+                obj.save()
+                messages.success(request,'Data Uploded Successfully')
+        return HttpResponseRedirect('/addserialno')
+    except IntegrityError as ex:
+        messages.success(request,'Serial No Already Exist')
+        return redirect('/addserialno')
+    except Exception as ex:
+        messages.success(request,'Header mismatch in exel sheet')       
+        return redirect('/addserialno')
+
+
+
+def searchserialno(req):
+    serialno=req.POST.get("serialno")
+    serial=letterserialno.objects.filter(serialno=serialno)
+    for i in serial:
+        if( i.serialno!=serialno):
+            messages.success(req,"Serial No. Not Found")   
+        else:
+            serial=letterserialno.objects.filter(serialno=serialno)
+            return render(req,'adminrole/searchserialno.html',{'serial':serial})   
+    messages.success(req,"Serial No. Not Found")  
+    return render(req,'adminrole/searchserialno.html')
+
+
+
+
+@login_required
+def editserialno(req):
+    if req.method=="GET":
+        serialno=req.GET.get("serialno")
+        serialdata=letterserialno.objects.get(serialno=serialno)
+        serialdata=letterserialno.objects.filter(serialno=serialno)
+        return render(req,'adminrole/editserialno.html',{'serialdata':serialdata})
+    else:
+        serialno=req.POST.get("serialno")
+        modstu3=letterserialno.objects.get(serialno=serialno)
+        modstu3.issuedto=req.POST.get("issuedto")
+        modstu3.subject=req.POST.get("subject")
+        modstu3.issuedate=req.POST.get("issuedate")
+        modstu3.save()
+        messages.success(req,"Letter Serial No.  Data Updated ") 
+        return render(req,'adminrole/addserialno.html')
 
 

@@ -124,3 +124,15 @@ class studentfee(models.Model):
 
 
 
+class letterserialno(models.Model):
+    serialno=models.CharField(max_length=50,unique=True)
+    issuername=models.CharField(max_length=50,blank=True,null=True)
+    issuedto=models.CharField(max_length=80,blank=True,null=True)
+    subject=models.CharField(max_length=30,blank=True,null=True)
+    issuedate=models.DateField(blank=True, null=True)
+
+    def __str__(self):
+        return self.serialno
+
+
+
