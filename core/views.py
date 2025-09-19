@@ -168,7 +168,7 @@ def generateOTP(n):
 def sendmail(email,otp):
     try:
         print("mail iniitializing")
-        message ="""<html><body><h1 style='color:red'>PJKSS Dehri</h1> <hr>Hello Mr. {0},<br><br>
+        message ="""<html><body><h1 style='color:red'>PATEL JAN KALYAN SEVA SAMITI</h1> <hr>Hello Mr. {0},<br><br>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         Please enter otp to complete your registration <b><br><br>
         Your OTP is :- <span style='color:red'>  {1} </spna> </b> please don't share to anyone.<br>
@@ -176,7 +176,7 @@ def sendmail(email,otp):
         smtp = smtplib.SMTP(host='smtp.gmail.com', port=587)
         print("mail part11111++++") 
         smtp.starttls()
-        smtp.login("dhirajdjangopython@gmail.com","tdilcffbrsczrtva")
+        smtp.login("pjkssinfo@gmail.com","bwqpbkcdutyqheoi")
         print("mail part2222++++") 
         msg = MIMEMultipart() 
         msg['From'] ="Dhiraj Patel"
@@ -217,7 +217,7 @@ def sendotp(request):
 def forgotsendmail(email,otp):
     try:
         print("mail iniitializing")
-        message ="""<html><body><h1 style='color:red'>Welcome to Cybrom</h1> <hr>Hello Mr. {0},<br><br>
+        message ="""<html><body><h1 style='color:red'>PATEL JAN KALYAN SEVA SAMITI</h1> <hr>Hello Mr. {0},<br><br>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         Please enter otp to reset your password <b><br><br>
         Your OTP is :- <span style='color:red'>  {1} </spna> </b> please don't share to anyone.<br>
@@ -225,7 +225,7 @@ def forgotsendmail(email,otp):
         smtp = smtplib.SMTP(host='smtp.gmail.com', port=587)
         print("mail part11111++++") 
         smtp.starttls()
-        smtp.login("dhirajdjangopython@gmail.com","tdilcffbrsczrtva")
+        smtp.login("pjkssinfo@gmail.com","bwqpbkcdutyqheoi")
         print("mail part2222++++") 
         msg = MIMEMultipart() 
         msg['From'] ="Dhiraj Patel"
@@ -269,7 +269,7 @@ def resetpass(req):
     rpass=User.objects.get(email=email)
     rpass.password=encryptedpassword
     rpass.save()
-    message ="""<html><body><h1 style='color:red'>Welcome to Cybrom</h1> <hr>Hello Mr."""+email+""",<br><br>
+    message ="""<html><body><h1 style='color:red'>PATEL JAN KALYAN SEVA SAMITI</h1> <hr>Hello Mr."""+email+""",<br><br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     You have successfuly reset your password <b><br><br>
     Visit :- <span style='color:red'> http://127.0.0.1:8000/login/ </spna> </b> to login <br>
@@ -277,7 +277,7 @@ def resetpass(req):
     smtp = smtplib.SMTP(host='smtp.gmail.com', port=587)
     print("mail part11111++++") 
     smtp.starttls()
-    smtp.login("dhirajdjangopython@gmail.com","tdilcffbrsczrtva")
+    smtp.login("pjkssinfo@gmail.com","bwqpbkcdutyqheoi")
     print("mail part2222++++") 
     msg = MIMEMultipart() 
     msg['From'] ="Dhiraj Patel"
