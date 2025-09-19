@@ -24,7 +24,7 @@ In this tutorial, we will learn how to create Sign Up or Registration Form in Dj
 6. Go to - http://localhost:8000/
 
 # git command
-# hit init
+# git init
 # git add .
 # git commit -m "first"
 # git push -f -u origin main for pushing on git or
