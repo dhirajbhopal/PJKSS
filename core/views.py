@@ -179,7 +179,7 @@ def sendmail(email,otp):
         smtp.login("pjkssinfo@gmail.com","bwqpbkcdutyqheoi")
         print("mail part2222++++") 
         msg = MIMEMultipart() 
-        msg['From'] ="Dhiraj Patel"
+        msg['From'] ="PJKSS ADMIN"
         print("mail part3333++++")
         msg['To'] = email
         print("mail part44 email")
@@ -228,7 +228,7 @@ def forgotsendmail(email,otp):
         smtp.login("pjkssinfo@gmail.com","bwqpbkcdutyqheoi")
         print("mail part2222++++") 
         msg = MIMEMultipart() 
-        msg['From'] ="Dhiraj Patel"
+        msg['From'] ="PJKSS ADMIN"
         print("mail part3333++++")
         msg['To'] = email
         print("mail part44 email")
@@ -280,7 +280,7 @@ def resetpass(req):
     smtp.login("pjkssinfo@gmail.com","bwqpbkcdutyqheoi")
     print("mail part2222++++") 
     msg = MIMEMultipart() 
-    msg['From'] ="Dhiraj Patel"
+    msg['From'] ="PJKSS ADMIN"
     print("mail part3333++++")
     msg['To'] = email
     print("mail part44 email")
