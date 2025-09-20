@@ -1,6 +1,6 @@
 from django.urls import path
 from core.views import ProfileView,Imageview,ProfileUpdate,mysingup,signuptask,forgotpassword,addstudent,showstu,\
-showmarks,addmakshtml,showfee,letterno,addserialno,searchserialno,editserialno
+showmarks,addmakshtml,showfee,letterno,addserialno,searchserialno,editserialno, gallery1, gallery2
 from django.contrib.auth import views as auth_views
 from django.contrib.auth import views
 from core import urls as core_urls
@@ -50,7 +50,9 @@ urlpatterns = [
     path('addfeesdata', views.addfeesdata),
     path('letterno', views.letterno),
     path('searchserialno', views.searchserialno),
-     path('editserialno', views.editserialno),
+    path('editserialno', views.editserialno),
+    path('gallery1', views.gallery1),
+    path('gallery2', views.gallery2),
     path('logout', views.logoutUser, name="logout"),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

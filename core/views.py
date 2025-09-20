@@ -13,19 +13,18 @@ from django.contrib import messages
 from django.db.utils import IntegrityError
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
-import smtplib
+#import smtplib
 import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from random import randint
 import openpyxl
 import pandas as pd
-from django.conf import settings  
-from tablib import Dataset
+from django.conf import settings 
 #from rest_framework import generics
 #from import_export import resources
 from django.core.files.storage import FileSystemStorage
-from num2words import num2words
+#from num2words import num2words
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 
@@ -1042,5 +1041,14 @@ def editserialno(req):
         modstu3.save()
         messages.success(req,"Letter Serial No.  Data Updated ") 
         return render(req,'adminrole/addserialno.html')
+
+
+def gallery1(req):
+    return render(req,'gallery1.html')
+
+
+def gallery2(req):
+    return render(req,'gallery2.html')
+
 
 

@@ -100,17 +100,146 @@ table, th, td {
 </head>
   <body background="{% static 'images/bg.jpg' %}" 
   style="background-repeat:repeat;background-size:cover;">
-  <div style="overflow-y:auto;">
-  <table class="container-fluid bg-info">
-    <tr>
-      <td><a href="/"><img src="{% static 'images/PATEL_LOGO.png' %}" height="178px"></a></td>
-      <td style="color: white; font-size: 30px; font-weight: bolder; text-align: center;">PATEL JAN KALYAN SEVA SAMITI <br> पटेल जन कल्याण सेवा समिति<br>
-        <a style="color: red; font-size: 15px; text-align:left;"> Add:- AT Patel Asmarak, GT Road Bus Stand, Ward No-26 Dist-Rohtas,Bihar (821307) </a> <br><a style="color: green; font-size: 15px; text-align:left;">पता:- पटेल स्मारक, जी.टी. रोड, बस स्टैंड डेहरी,  वार्ड संख्या-26, जिला- रोहतास, बिहार (821307)</a></td>
-      <td><a><img src="{% static 'images/Azadi-Ka-Amrit-Mahotsav-Logo.png' %}" height="80px" style="align-items:left;"></a></td>
-      <td><a><img src="{% static 'images/gandiji_logo.png' %}" height="80px"></a></td>
-      <td><a href="{% static 'images/modnarayanfounder.png' %}"><img src="{% static 'images/modnarayanfounder.png' %}" height="178px"></a></td>
-</table>
+ <style>
+/* Responsive header container */
+.header-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  background-color: pink; /* Bootstrap's info color */
+  color: white;
+  text-align: center;
+}
+
+.header-logo {
+  flex: 1 1 100px;
+  text-align: center;
+}
+
+.header-text {
+  flex: 2 1 300px;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.header-text a {
+  display: block;
+  font-size: 14px;
+  text-align: center;
+}
+
+.header-icons {
+  flex: 1 1 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding: 5px;
+}
+
+.header-icons img {
+  height: 60px;
+  margin: 5px;
+}
+
+@media screen and (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .header-text {
+    font-size: 18px;
+  }
+
+  .header-text a {
+    font-size: 12px;
+  }
+
+  .header-icons img {
+    height: 50px;
+  }
+}
+
+/* Navbar styles */
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav .icon {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav a:not(:first-child) {
+    display: none;
+  }
+
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+
+  .topnav.responsive {
+    position: relative;
+  }
+
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+</style>
+
+<!-- Responsive Header using Flexbox -->
+<div class="header-container">
+  <div class="header-logo">
+    <a href="/"><img src="{% static 'images/PATEL_LOGO.png' %}" align="left" height="178px" alt="Logo"></a>
   </div>
+  
+  <div class="header-text">
+    <a style="font-size: 30px">PATEL JAN KALYAN SEVA SAMITI <br>
+    पटेल जन कल्याण सेवा समिति<br></a>
+    <a style="color: yellow; font-size: 15px">Add:- AT Patel Asmarak, GT Road Bus Stand, Ward No-26 Dist-Rohtas, Bihar (821307)</a>
+    <a style="color: yellow; font-size: 15px">पता:- पटेल स्मारक, जी.टी. रोड, बस स्टैंड डेहरी, वार्ड संख्या-26, जिला- रोहतास, बिहार (821307)</a>
+  </div>
+
+  <div class="header-icons">
+    <img src="{% static 'images/Azadi-Ka-Amrit-Mahotsav-Logo.png' %}" alt="Amrit Logo">
+    <img src="{% static 'images/gandiji_logo.png' %}" alt="Gandhi Ji">
+  </div>
+  <a href="{% static 'images/modnarayanfounder.png' %}"> <img src="{% static 'images/modnarayanfounder.png' %}" height="178px" alt="Founder"></a>
+</div>
+
 
 <div class="topnav" id="myTopnav">
   <a href="/" class="active"><img src="{% static 'images/PATEL_LOGO.png' %}" height="23px"><i class="fa fa-home faicon" aria-hidden="true"></i> Home</a>
@@ -122,9 +251,9 @@ table, th, td {
   </div>
   <!-------Start Admin Login---->
   {% if request.user.is_authenticated %}
-     <span style="float: right; color:red; padding-top: 15px;  padding-right: 20px;" type="button"data-bs-toggle="dropdown" aria-expanded="false" > <img src="{{user.image.url}}" style="border-radius:20px;" height="25px"> </span>
+     <span style="float: right; color:red; padding-top: 15px;  padding-right: 20px;" > <img src="{{user.image.url}}" style="border-radius:20px;" height="25px"> </span>
      <span style="float: right; color: white; padding-top: 15px;"> {{user.role}}&#160 </span>
-    <span style="float: right; color: white; padding-top: 15px;"> {{user.first_name}} {{user.last_name}} :&#160</span>
+    <span style="float: right; color: white; padding-top: 15px;" type="button"data-bs-toggle="dropdown" aria-expanded="false"> {{user.first_name}} {{user.last_name}} :&#160</span>
      <ul class="dropdown-menu border-0 text-center rounded rounded-3" style="background-color: rgba(254, 185, 185,0.93);">
       <table>
     <tr> 
@@ -226,6 +355,8 @@ function myFunction() {
 {% block about %} {% endblock %} 
 {% block course %} {% endblock %}
 {% block contact %} {% endblock %}
+{% block gallery1 %} {% endblock %}
+{% block gallery2 %} {% endblock %}
     <!------End of Menu Part---->
 {% block content %} {% endblock content %}
 
@@ -251,7 +382,7 @@ function myFunction() {
          <hr style="border-width:5px; size: 20px; color:red;">
         <marquee direction="up" scrollamount="1" onmouseover="this.stop();"onmouseout="this.start();">
          <ol>
-            <li style="color:green; font-size: 20px;">आज 15 अगस्त 2025 को सुबह 10:30 बजे पटेल अस्मारक डेहरी में धूम धाम से तिरंगा झंडा फहराया जाएगा, आप सभी से निवेदन है कि समय पे आकर आजादी का पर्व धूम धाम से मनाएं l<a href="" style="color: red;"></a> </li>
+            <li style="color:green; font-size: 20px;">आज 15 अगस्त 2025 को सुबह 10:30 बजे पटेल स्मारक डेहरी में धूम धाम से तिरंगा झंडा फहराया जाएगा, आप सभी से निवेदन है कि समय पे आकर आजादी का पर्व धूम धाम से मनाएं l<a href="" style="color: red;"></a> </li>
             <!--<li style="color:green; font-size: 20px;">3rd Semester Result will decler on 06-Oct-22 at 11:30PM </li>
             <li style="color:green; font-size: 20px;">5th Semester Result will decler on 07-Oct-22 at 11:30AM</li>
             <li style="color:green; font-size: 20px;">7th Semester Result will decler on 08-Oct-22 at 11:30AM</li>
@@ -279,107 +410,24 @@ Group Chairman
 </div>
    <!-------------Image Section   Image ----------------------->
 
-        <div class="p-0 text-center m-0">
+        <div class="p-0 text-center m-0"  align="left">
         <h2 style="color: red;">Gallery</h2>
         <hr style="border-width:10px; size: 20px; color:darkgreen;">
-        </div>
-
-<div class="accordion p-0 m-0" id="accordionExample">
-  <div class="accordion-item bg-transparent border-0">
-      <button class="accordion-button p-0 m-1 w-50" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <div class="container">
+          <div class="float-start">
+        <a href="/gallery1"> <button class="btn btn-outline-danger rounded-4">Click here for 15-August-2025 More Images
         <img src="{% static 'images/15-August-25/1.jpeg' %}" height="50px;" width="80px"class="rounded-4"> 
         <img src="{% static 'images/15-August-25/2.jpeg' %}" height="50px;" width="80px"class="rounded-4"> 
-         &nbsp Click here for 15-August-2025 More Images  
-      </button>
-        <div id="collapseTwo" class="accordion-collapse collapse hide" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        <a href="{% static 'images/15-August-25/1.jpeg' %}"><img src="{% static 'images/15-August-25/1.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
-        <a href="{% static 'images/15-August-25/2.jpeg' %}"><img src="{% static 'images/15-August-25/2.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
-        <a href="{% static 'images/15-August-25/3.jpeg' %}"><img src="{% static 'images/15-August-25/3.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
-        <a href="{% static 'images/15-August-25/4.jpeg' %}"><img src="{% static 'images/15-August-25/4.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
-        <a href="{% static 'images/15-August-25/5.jpeg' %}"><img src="{% static 'images/15-August-25/5.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
-        <a href="{% static 'images/15-August-25/6.jpeg' %}"><img src="{% static 'images/15-August-25/6.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
+        </button>
+        </a>
 
-        <a href="{% static 'images/15-August-25/7.jpeg' %}"><img src="{% static 'images/15-August-25/7.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
-        <a href="{% static 'images/15-August-25/8.jpeg' %}"><img src="{% static 'images/15-August-25/8.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
-        <a href="{% static 'images/15-August-25/9.jpeg' %}"><img src="{% static 'images/15-August-25/9.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
-        <a href="{% static 'images/15-August-25/10.jpeg' %}"><img src="{% static 'images/15-August-25/10.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
-        <a href="{% static 'images/15-August-25/11.jpeg' %}"><img src="{% static 'images/15-August-25/11.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
-        <a href="{% static 'images/15-August-25/12.jpeg' %}"><img src="{% static 'images/15-August-25/12.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
-
-        <a href="{% static 'images/15-August-25/13.jpeg' %}"><img src="{% static 'images/15-August-25/13.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
-        <a href="{% static 'images/15-August-25/14.jpeg' %}"><img src="{% static 'images/15-August-25/14.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
-        <a href="{% static 'images/15-August-25/15.jpeg' %}"><img src="{% static 'images/15-August-25/15.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
-        <a href="{% static 'images/15-August-25/16.jpeg' %}"><img src="{% static 'images/15-August-25/16.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
-        <a href="{% static 'images/15-August-25/17.jpeg' %}"><img src="{% static 'images/15-August-25/17.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
-        <a href="{% static 'images/15-August-25/18.jpeg' %}"><img src="{% static 'images/15-August-25/18.jpeg' %}" height="150px;" width="269px"class="rounded-4"></a>
-
-   <a href= "{% static 'videos/15-August-25/v1.mp4' %}"> <video width="320" height="240" controls>
-  <source src="{% static 'videos/15-August-25/v1.mp4' %}" type="video/mp4">
-  <source src="movie.ogg" type="video/ogg">
-</video>
-</a>
-
-<a href= "{% static 'videos/15-August-25/v2.mp4' %}"> <video width="320" height="240" controls>
-  <source src="{% static 'videos/15-August-25/v2.mp4' %}" type="video/mp4">
-  <source src="movie.ogg" type="video/ogg">
-</video>
-</a>
-<a href= "{% static 'videos/15-August-25/v3.mp4' %}"> <video width="320" height="240" controls>
-  <source src="{% static 'videos/15-August-25/v3.mp4' %}" type="video/mp4">
-  <source src="movie.ogg" type="video/ogg">
-</video>
-</a>
-<a href= "{% static 'videos/15-August-25/v4.mp4' %}"> <video width="320" height="240" controls>
-  <source src="{% static 'videos/15-August-25/v4.mp4' %}" type="video/mp4">
-  <source src="movie.ogg" type="video/ogg">
-</video>
-</a>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="accordion p-0 m-0" id="accordionExample">
-  <div class="accordion-item bg-transparent border-0">
-      <button class="accordion-button p-0 m-1 w-50" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <a href="/gallery2"> <button class="btn btn-outline-danger rounded-4">Click here for 31-Jan-2025 More Images 
         <img src="{% static 'images/31jan_BrahmanBhoj/1.jpg' %}" height="50px;" width="80px"class="rounded-4"> 
-        <img src="{% static 'images/31jan_BrahmanBhoj/21.jpg' %}" height="50px;" width="80px"class="rounded-4">
-         &nbsp Click here for 31-Jan-2025 More Images  
-      </button>
-        <div id="collapseOne" class="accordion-collapse collapse hide" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        <a href="{% static 'images/31jan_BrahmanBhoj/1.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/1.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
-      <a href="{% static 'images/31jan_BrahmanBhoj/2.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/2.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
-      <a href="{% static 'images/31jan_BrahmanBhoj/3.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/3.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
-       <a href="{% static 'images/31jan_BrahmanBhoj/4.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/4.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
-       <a href="{% static 'images/31jan_BrahmanBhoj/5.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/5.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
-      <a href="{% static 'images/31jan_BrahmanBhoj/6.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/6.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
-     
-       <a href="{% static 'images/31jan_BrahmanBhoj/7.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/7.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
-      <a href="{% static 'images/31jan_BrahmanBhoj/8.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/8.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
-      <a href="{% static 'images/31jan_BrahmanBhoj/9.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/9.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
-    <a href="{% static 'images/31jan_BrahmanBhoj/10.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/10.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
-    <a href="{% static 'images/31jan_BrahmanBhoj/11.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/11.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
-    <a href="{% static 'images/31jan_BrahmanBhoj/12.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/12.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
-
-    <a href="{% static 'images/31jan_BrahmanBhoj/13.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/13.jpg' %}" height="150px;" width="269px"class="rounded-4"></a></td>
-    <a href="{% static 'images/31jan_BrahmanBhoj/14.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/14.jpg' %}" height="150px;" width="269px"class="rounded-4"></a></td>
-     <a href="{% static 'images/31jan_BrahmanBhoj/15.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/15.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
-      <a href="{% static 'images/31jan_BrahmanBhoj/16.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/16.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
-      <a href="{% static 'images/31jan_BrahmanBhoj/17.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/17.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
-      <a href="{% static 'images/31jan_BrahmanBhoj/18.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/18.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
-      <a href="{% static 'images/31jan_BrahmanBhoj/19.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/19.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
-      <a href="{% static 'images/31jan_BrahmanBhoj/20.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/20.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
-      <a href="{% static 'images/31jan_BrahmanBhoj/21.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/21.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
-       <a href="{% static 'images/31jan_BrahmanBhoj/22.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/22.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
-      <a href="{% static 'images/31jan_BrahmanBhoj/23.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/23.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
-      <a href="{% static 'images/31jan_BrahmanBhoj/24.jpg' %}"><img src="{% static 'images/31jan_BrahmanBhoj/24.jpg' %}" height="150px;" width="269px"class="rounded-4"></a>
-      </div>
+        <img src="{% static 'images/31jan_BrahmanBhoj/21.jpg' %}" height="50px;" width="80px"class="rounded-4"> 
+      </button> </a>
     </div>
   </div>
-
-
+    </div>
 
   {% endblock %}
 
