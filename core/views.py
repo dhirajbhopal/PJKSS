@@ -119,6 +119,8 @@ class signuptask(View):
         code = 0
         try:
             encryptedpassword=make_password(request.GET['password'])
+            global emailuser
+            emailuser = request.GET.get("emailid")
             ob=User()
             ob2=studentdetails()
             ob.username=request.GET.get("username")
@@ -142,7 +144,7 @@ class signuptask(View):
         except Exception as ex:       
             code = 2
             messages.success(request,'Email id does not exist !')
-            return render(req,'commons/signup.html')
+            return render(request,'commons/signup.html')
         return redirect("/cheksignup?err="+str(code))
 
 
@@ -150,6 +152,38 @@ def cheksignup(req):
     code = req.GET.get("err")
     msg = ""
     if code=="0":
+        message ="""<html><body><h1 style='color:red'>PATEL JAN KALYAN SEVA SAMITI</h1> <hr>Hello Mr. Dhiraj Patel Admin <br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        One New User has registered, Please assign his/her Role and Roll No. <b><br>
+        User Eamil id is:- """+emailuser+"""<br><br>
+        Visit :- <span style='color:red'> https://pjkss.pythonanywhere.com/pateladminlogin/?next=/pateladminlogin </spna> </b> to login <br>
+        <br><b> Thanks<br><br> Patel Jan Kalyan Seva Samiti <br>  Head Office Dehri </b></body></html>"""
+        smtp = smtplib.SMTP(host='smtp.gmail.com', port=587)
+        smtp.starttls()
+        smtp.login("pjkssinfo@gmail.com","bwqpbkcdutyqheoi")
+        msg = MIMEMultipart() 
+        msg['From'] ="PJKSS ADMIN"
+        msg['To'] = "dhirajpatel08@gmail.com"
+        msg['Subject'] = "New Registeration"
+        msg.attach(MIMEText(message, 'html'))
+        smtp.send_message(msg)
+        smtp.quit()
+        message ="""<html><body><h1 style='color:red'>PATEL JAN KALYAN SEVA SAMITI</h1> <hr>Hello Mr. """+emailuser+""" <br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Your Registration is Successfull <b><br>
+        Your User id is:- """+emailuser+"""<br><br>
+        Visit :- <span style='color:red'> https://pjkss.pythonanywhere.com/login </spna> </b> to login <br>
+        <br><b> Thanks<br><br> Patel Jan Kalyan Seva Samiti <br>  Head Office Dehri </b></body></html>"""
+        smtp = smtplib.SMTP(host='smtp.gmail.com', port=587)
+        smtp.starttls()
+        smtp.login("pjkssinfo@gmail.com","bwqpbkcdutyqheoi")
+        msg = MIMEMultipart() 
+        msg['From'] ="PJKSS ADMIN"
+        msg['To'] = emailuser
+        msg['Subject'] = "Registration is Successfull"
+        msg.attach(MIMEText(message, 'html'))
+        smtp.send_message(msg)
+        smtp.quit()
         messages.success(req,"Registeration Done Successfully")
         return redirect('login')
     if code=="1":
@@ -173,23 +207,15 @@ def sendmail(email,otp):
         Your OTP is :- <span style='color:red'>  {1} </spna> </b> please don't share to anyone.<br>
         <br><b> Thanks<br><br> Team Cybrom<br>    Bhopal Branch </b></body></html>""".format(email,otp)
         smtp = smtplib.SMTP(host='smtp.gmail.com', port=587)
-        print("mail part11111++++") 
         smtp.starttls()
         smtp.login("pjkssinfo@gmail.com","bwqpbkcdutyqheoi")
-        print("mail part2222++++") 
         msg = MIMEMultipart() 
         msg['From'] ="PJKSS ADMIN"
-        print("mail part3333++++")
         msg['To'] = email
-        print("mail part44 email")
         msg['Subject'] = "Registration OTP"
-        print("mail part55555 Subject++++")
         msg.attach(MIMEText(message, 'html'))
-        print("mail part55 Message++++")
         smtp.send_message(msg)
-        print("mail part777++++")
-        smtp.quit()
-        print("mail done+++++")      
+        smtp.quit()     
         return True
     except Exception as ex:       
         return False
@@ -221,24 +247,16 @@ def forgotsendmail(email,otp):
         Please enter otp to reset your password <b><br><br>
         Your OTP is :- <span style='color:red'>  {1} </spna> </b> please don't share to anyone.<br>
         <br><b> Thanks<br><br> Team Cybrom<br>    Bhopal Branch </b></body></html>""".format(email,otp)
-        smtp = smtplib.SMTP(host='smtp.gmail.com', port=587)
-        print("mail part11111++++") 
+        smtp = smtplib.SMTP(host='smtp.gmail.com', port=587) 
         smtp.starttls()
         smtp.login("pjkssinfo@gmail.com","bwqpbkcdutyqheoi")
-        print("mail part2222++++") 
         msg = MIMEMultipart() 
         msg['From'] ="PJKSS ADMIN"
-        print("mail part3333++++")
         msg['To'] = email
-        print("mail part44 email")
         msg['Subject'] = "Password reset OTP"
-        print("mail part55555 Subject++++")
         msg.attach(MIMEText(message, 'html'))
-        print("mail part55 Message++++")
         smtp.send_message(msg)
-        print("mail part777++++")
-        smtp.quit()
-        print("mail done+++++")      
+        smtp.quit()     
         return True
     except Exception as ex:       
         return False
@@ -271,26 +289,18 @@ def resetpass(req):
     message ="""<html><body><h1 style='color:red'>PATEL JAN KALYAN SEVA SAMITI</h1> <hr>Hello Mr."""+email+""",<br><br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     You have successfuly reset your password <b><br><br>
-    Visit :- <span style='color:red'> http://127.0.0.1:8000/login/ </spna> </b> to login <br>
+    Visit :- <span style='color:red'> https://pjkss.pythonanywhere.com/login </spna> </b> to login <br>
     <br><b> Thanks<br><br> Team Cybrom<br>    Bhopal Branch </b></body></html>"""
-    smtp = smtplib.SMTP(host='smtp.gmail.com', port=587)
-    print("mail part11111++++") 
+    smtp = smtplib.SMTP(host='smtp.gmail.com', port=587) 
     smtp.starttls()
     smtp.login("pjkssinfo@gmail.com","bwqpbkcdutyqheoi")
-    print("mail part2222++++") 
     msg = MIMEMultipart() 
     msg['From'] ="PJKSS ADMIN"
-    print("mail part3333++++")
     msg['To'] = email
-    print("mail part44 email")
     msg['Subject'] = "Password reset Done"
-    print("mail part55555 Subject++++")
     msg.attach(MIMEText(message, 'html'))
-    print("mail part55 Message++++")
     smtp.send_message(msg)
-    print("mail part777++++")
     smtp.quit()
-    print("mail done+++++")
     messages.success(req,'Password Changed Successfully')
     return redirect('login')
     
