@@ -13,7 +13,7 @@ from django.contrib import messages
 from django.db.utils import IntegrityError
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
-#import smtplib
+import smtplib
 import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -24,7 +24,7 @@ from django.conf import settings
 #from rest_framework import generics
 #from import_export import resources
 from django.core.files.storage import FileSystemStorage
-#from num2words import num2words
+from num2words import num2words
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 
