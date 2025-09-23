@@ -119,8 +119,9 @@ class signuptask(View):
         code = 0
         try:
             encryptedpassword=make_password(request.GET['password'])
-            global emailuser
-            emailuser = request.GET.get("emailid")
+            global emailuser,userfirstname
+            emailuser = request.GET.get("username")
+            userfirstname = request.GET.get("name")
             ob=User()
             ob2=studentdetails()
             ob.username=request.GET.get("username")
@@ -168,7 +169,7 @@ def cheksignup(req):
         msg.attach(MIMEText(message, 'html'))
         smtp.send_message(msg)
         smtp.quit()
-        message ="""<html><body><h1 style='color:red'>PATEL JAN KALYAN SEVA SAMITI</h1> <hr>Hello Mr. """+emailuser+""" <br><br>
+        message ="""<html><body><h1 style='color:red'>PATEL JAN KALYAN SEVA SAMITI</h1> <hr>Hello Mr. """+userfirstname+""" <br><br>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         Your Registration is Successfull <b><br>
         Your User id is:- """+emailuser+"""<br><br>
@@ -201,7 +202,7 @@ def generateOTP(n):
 def sendmail(email,otp):
     try:
         print("mail iniitializing")
-        message ="""<html><body><h1 style='color:red'>PATEL JAN KALYAN SEVA SAMITI</h1> <hr>Hello Mr. {0},<br><br>
+        message ="""<html><body><h1 style='color:red'>PATEL JAN KALYAN SEVA SAMITI</h1> <hr>Hello Mr./Mrs. """+userfirstname+""" <br> <br> Your User Id Is:-  {0},<br><br>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         Please enter otp to complete your registration <b><br><br>
         Your OTP is :- <span style='color:red'>  {1} </spna> </b> please don't share to anyone.<br>
@@ -242,7 +243,7 @@ def sendotp(request):
 def forgotsendmail(email,otp):
     try:
         print("mail iniitializing")
-        message ="""<html><body><h1 style='color:red'>PATEL JAN KALYAN SEVA SAMITI</h1> <hr>Hello Mr. {0},<br><br>
+        message ="""<html><body><h1 style='color:red'>PATEL JAN KALYAN SEVA SAMITI</h1> <hr>Hello Mr./Mrs. """+userfirstname+""" <br> <br> Your User Id Is:- {0},<br><br>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         Please enter otp to reset your password <b><br><br>
         Your OTP is :- <span style='color:red'>  {1} </spna> </b> please don't share to anyone.<br>
@@ -286,7 +287,7 @@ def resetpass(req):
     rpass=User.objects.get(email=email)
     rpass.password=encryptedpassword
     rpass.save()
-    message ="""<html><body><h1 style='color:red'>PATEL JAN KALYAN SEVA SAMITI</h1> <hr>Hello Mr."""+email+""",<br><br>
+    message ="""<html><body><h1 style='color:red'>PATEL JAN KALYAN SEVA SAMITI</h1> <hr>Hello Mr./Mrs."""+userfirstname+""" ,<br><br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     You have successfuly reset your password <b><br><br>
     Visit :- <span style='color:red'> https://pjkss.pythonanywhere.com/login </spna> </b> to login <br>

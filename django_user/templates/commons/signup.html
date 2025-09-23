@@ -95,12 +95,11 @@
 
  function validation() 
   { 
-    var username=document.f1.username.value;
     var name=document.f1.name.value;
     var name1=document.f1.name1.value;
-    var emailid1=document.f1.emailid1.value;
+    var username=document.f1.username.value;
     var emailid=document.f1.emailid.value;
-    var validmail=emailid1.endsWith("@gmail.com")
+    var username=username.endsWith("@gmail.com")
     var password1=document.f1.password1.value;
     var password=document.f1.password.value; 
     var mobileno=document.f1.mobileno.value;
@@ -110,12 +109,7 @@
     var str2 = document.getElementById('txtCompare').value;
     var otpcheck = document.getElementById('otprec').value; 
 
-    if (username=="")
-  {
-    alert("Please enter unsername");
-    document.f1.username.focus();
-    return false;
-  }
+    
 
      if (gender=="")
 
@@ -152,20 +146,19 @@
       return false;
     }
 
- 
+if (username=="")
+  {
+    alert("Please enter Emailid as unsername");
+    document.f1.username.focus();
+    return false;
+  }
 
-      if(emailid1=="")
-    {
-      alert("Please enter Email-ID");
-      document.f1.emailid1.focus();
-      return false;
-    }
-  
-  if(validmail!=true)
+   
+  if(username!=true)
 
     {
       alert("Please enter Valid Email-ID");
-      document.f1.emailid1.focus();
+      document.f1.username.focus();
       return false;
     }
 
@@ -178,14 +171,14 @@
       return false;
     }
 
-    if(emailid1!=emailid)
-    {
-      alert("Emaid does not match");
-      document.f1.emailid1.value="";
-      document.f1.emailid.value="";
-      document.f1.emailid1.focus();
-      return false;
-    }
+    //if(username!=emailid)
+    //{
+      //alert("Emaid does not match");
+      //document.f1.username.value="";
+      //document.f1.emailid.value="";
+      //document.f1.username.focus();
+      //return false;
+    //}
   
     if (password1=="")
     {
@@ -292,10 +285,6 @@ function Generate() {
                 <form name="f1" action="{% url 'signuptask' %}" method="GET" enctype="multipart/form-data" onsubmit="return validation();" class="mx-1 mx-md-4">
                   {% csrf_token %}
                    <div class="d-flex flex-row align-items-center mb-0">
-                    <div class="form-outline flex-fill mb-2">
-                      <label class="form-label" for="form3Example1c"style="color:green;">Username </label><label class="form-label" for="form3Example1c" style="color:red;">*</label>
-                      <input type="text" name="username" id="hide1" class="form-control" placeholder="Email Id">                     
-                    </div>
                     <div class="form-outline flex-fill mb-2" style="margin-top: 25px;">
                       &#160<input class="form-check-input" type="radio" name="gender" value="Male">
                       <label class="form-check-label" style="color:green;">
@@ -320,11 +309,11 @@ function Generate() {
                   <div id="hidedivemail" class="d-flex flex-row align-items-center mb-0">
                     <div class="form-outline flex-fill mb-2">
                       <label class="form-label" for="form3Example1c" id="hide1" style="color:green;"> Email Id</label><label class="form-label" for="form3Example1c" id="hide2"  style="color:red;">*</label>
-                      <input type="email" name="emailid1" id="hide2" class="form-control">
+                      <input type="email" name="username" id="hide2" class="form-control" placeholder="Email Id">
                     </div>&#160 &#160
                     <div class="form-outline flex-fill mb-2">
                       <label class="form-label" for="form3Example1c"  id="hide4" style="color:green;"> Confirm Email Id</label><label class="form-label"id="hide5" for="form3Example1c" style="color:red;">*</label>
-                      <input type="email" name="emailid" id="hide3" class="form-control">
+                      <input type="email" name="emailid" id="hide3" class="form-control" placeholder="Retype Email Id">
                     </div>
                     </div>
 

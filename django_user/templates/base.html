@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!--<meta http-equiv="refresh" content="180">-->
 <style>
+  <div style="overflow-x:auto;">
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -36,7 +37,7 @@ body {
   position: sticky;
   top:0;
   overflow: hidden;
- 
+
 }
 
 
@@ -98,7 +99,7 @@ table, th, td {
 </style>
 
 </head>
-  <body background="{% static 'images/bg.jpg' %}" 
+  <body background="{% static 'images/bg.jpg' %}"
   style="background-repeat:repeat;background-size:cover;">
  <style>
 /* Responsive header container */
@@ -221,15 +222,21 @@ table, th, td {
 </style>
 
 <!-- Responsive Header using Flexbox -->
-<div id="data" class="container-fluid w-100 p-0 m-0">
-  <img src="{% static 'images/website_headder.jpg' %}" style="width: 100%; height: 250px;">
-    </div>
+<div class="container-fluid w-100 p-0 m-0 bg-warning col-md-6 mx-auto text-center" >
+
+    <a href="/"><img src="{% static 'images/PATEL_LOGO.png' %}" align="left" style="margin-left: 7%;" height="160px" alt="Logo"></a>
+    <img src="{% static 'images/website_headder.png' %}" style="width: 50%; height: 170px;" align="center">
+    <a href="{% static 'images/modnarayanfounder.png' %}"><img src="{% static 'images/modnarayanfounder.png' %}"height="165px" alt="Logo" style="margin-left: 15%;"></a>
+
+</div>
+
+
 <!----- old hedding
 <div class="header-container">
   <div class="header-logo">
     <a href="/"><img src="{% static 'images/PATEL_LOGO.png' %}" align="left" height="178px" alt="Logo"></a>
   </div>
-  
+
   <div class="header-text">
     <a style="font-size: 30px ; text-align:left;">PATEL JAN KALYAN SEVA SAMITI <br>पटेल जन कल्याण सेवा समिति<br></a>
     <a style="color: yellow; font-size: 15px; text-align:left;">Add:- AT Patel Asmarak, GT Road Bus Stand Dehri, Ward No-26 Dist-Rohtas, Bihar (821307)</a>
@@ -240,12 +247,12 @@ table, th, td {
 </div>
  ---->
 
-<div class="topnav" id="myTopnav">
+<div class="topnav container-fluid w-100 p-0 m-0" id="myTopnav">
   <a href="/" class="active"><img src="{% static 'images/PATEL_LOGO.png' %}" height="23px"><i class="fa fa-home faicon" aria-hidden="true"></i> Home</a>
   <a href="{% url 'contact' %}"><i class="fa fa-phone faicon" aria-hidden="true"></i> Contact Us</a>
   <a href="{% url 'course' %}"><i class="fa fa-book" aria-hidden="true"></i> Vision</a>
   <a href="{% url 'about' %}"><i class="fa fa-info-circle faicon" aria-hidden="true"></i>About</a>
-  
+
   <div class="topnav-right">
   </div>
   <!-------Start Admin Login---->
@@ -255,7 +262,7 @@ table, th, td {
     <span style="float: right; color: white; padding-top: 15px;" type="button"data-bs-toggle="dropdown" aria-expanded="false"> {{user.first_name}} {{user.last_name}} :&#160</span>
      <ul class="dropdown-menu border-0 text-center rounded rounded-3" style="background-color: rgba(254, 185, 185,0.93);">
       <table>
-    <tr> 
+    <tr>
     <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:20px;" href="{% url 'logout' %}">
       <img src="{% static 'menuimages/logout.png' %}" height="50px"></a></td>
     <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:20px;" href="{% url 'change_password' %}">
@@ -267,8 +274,8 @@ table, th, td {
     <td ><a href="{% url 'imageview' %}" class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:20px;">
       <img src="{% static 'menuimages/updateimage.png' %}" height="50px"></a></td>
     </tr>
-      
-    <!------- Start Studnet Login----> 
+
+    <!------- Start Studnet Login---->
      {% if user.role == "Student" %}
      <tr>
     <td><form action="viewresult" method="POST">
@@ -351,7 +358,7 @@ function myFunction() {
 <!------header Part ----->
     <!---------End of Header Part----->
 
-{% block about %} {% endblock %} 
+{% block about %} {% endblock %}
 {% block course %} {% endblock %}
 {% block contact %} {% endblock %}
 {% block gallery1 %} {% endblock %}
@@ -376,7 +383,7 @@ function myFunction() {
 <div class="container-fluid">
   <div class="row gy-5">
     <div class="col-6 p-2">
-      <div class="p-1 rounded-2 text-center"> 
+      <div class="p-1 rounded-2 text-center">
         <h1 style="color: green;"> <i style="color:darkred;" class="fa fa-bullhorn" aria-hidden="true"></i> News & Committee Updates </h1>
          <hr style="border-width:5px; size: 20px; color:red;">
         <marquee direction="up" scrollamount="1" onmouseover="this.stop();"onmouseout="this.start();">
@@ -392,15 +399,15 @@ function myFunction() {
     </ol>
   </marquee>
  </div>
-        
-        
+
+
           </div>
     <div class="col-6 p-2">
       <div class="p-1">
         <h2 style="color:red;"> Founder’s Message </h2>
         <hr style="border-width:5px; size: 20px; color:red;">
         <img src="{% static 'images/modnarayanfounder.jpeg' %}" class="rounded-4 p-1" align="left" height="200px" style="padding:0px; margin-left:0px;">
-        
+
   <div style="padding:10px;"> Education is a social process. Education is growth. Education is not preparation for life, but education is life itself.“In this era of globalisation, the utmost urge is pace. Absolute knowledge of management and corporate wisdom is indeed the most effective phenomenon for development, which requires actual capitalisation of knowledge for taking decisions in time. The ethos of Indian culture and the pedagogy of enlightening wisdom belong to certain directive approaches which require zeal to create an ideal professional who can contribute to the society in totality. We, at Acropolis, are developing such professionals who will serve the society and work towards its development and towards environmental support, with an attitude of creating surplus in the field of education. I take this opportunity to emphasise that Acropolis will surely contribute in the development of such professionals who will carry the flag of the nation at the world’s highest Aero.”
 Ashish Sojatia
 Group Chairman
@@ -415,14 +422,14 @@ Group Chairman
         <div class="container">
           <div class="float-start">
         <a href="/gallery1"> <button class="btn btn-outline-danger rounded-4">Click here for 15-August-2025 More Images
-        <img src="{% static 'images/15-August-25/1.jpeg' %}" height="50px;" width="80px"class="rounded-4"> 
-        <img src="{% static 'images/15-August-25/2.jpeg' %}" height="50px;" width="80px"class="rounded-4"> 
+        <img src="{% static 'images/15-August-25/1.jpeg' %}" height="50px;" width="80px"class="rounded-4">
+        <img src="{% static 'images/15-August-25/2.jpeg' %}" height="50px;" width="80px"class="rounded-4">
         </button>
         </a>
 
-        <a href="/gallery2"> <button class="btn btn-outline-danger rounded-4">Click here for 31-Jan-2025 More Images 
-        <img src="{% static 'images/31jan_BrahmanBhoj/1.jpg' %}" height="50px;" width="80px"class="rounded-4"> 
-        <img src="{% static 'images/31jan_BrahmanBhoj/21.jpg' %}" height="50px;" width="80px"class="rounded-4"> 
+        <a href="/gallery2"> <button class="btn btn-outline-danger rounded-4">Click here for 31-Jan-2025 More Images
+        <img src="{% static 'images/31jan_BrahmanBhoj/1.jpg' %}" height="50px;" width="80px"class="rounded-4">
+        <img src="{% static 'images/31jan_BrahmanBhoj/21.jpg' %}" height="50px;" width="80px"class="rounded-4">
       </button> </a>
     </div>
   </div>
@@ -432,7 +439,7 @@ Group Chairman
 
  {% block register %} {% endblock %}
 <!---------End of Content Part---->
-{% block footer %} 
+{% block footer %}
 
 <style>
 .footer {
@@ -446,6 +453,7 @@ Group Chairman
 </style>
 <div class=" footer bg-info">
 <span> Designed by Dhiraj Patel &#169 COPYRIGHT RESERVED 2025</span>
+</div>
 </div>
  </body>
  </html>
