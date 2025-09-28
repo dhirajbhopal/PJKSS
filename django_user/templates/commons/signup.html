@@ -3,21 +3,34 @@
 {% block title %}Sigin{% endblock title %}
 {% block content %} 
   <script type="text/javascript" src="{% static 'jquery.js' %}"></script>
-  <script type="text/javascript">
+ <script type="text/javascript">
     $(document).ready(function(){
      $("#otpbtn").click(function(){
-      $("#hide1").prop('disabled', true);
-      $("#hide2").prop('disabled', true);
-      $("#hide3").prop('disabled', true);
+      $("#hide1").hide();
+      $("#email").hide();
      });
     });
   </script>
+
+<script>
+function displayInput2() {
+  var userInput = document.getElementById("hide1").value;
+  document.getElementById("output2").innerHTML = userInput;
+}
+</script>
+<script>
+function displayInput3() {
+  var userInput = document.getElementById("email").value;
+  document.getElementById("output3").innerHTML = userInput;
+}
+</script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type='text/javascript'></script>
 <script>
     function send()
         {
             document.getElementById("otpresult").innerHTML = "Sending OTP... ";
-            var mail = document.getElementById("hide3").value;
+            var mail = document.getElementById("email").value;
             
             // Request Object
             var request = new XMLHttpRequest();
@@ -308,12 +321,12 @@ function Generate() {
                   </div>
                   <div id="hidedivemail" class="d-flex flex-row align-items-center mb-0">
                     <div class="form-outline flex-fill mb-2">
-                      <label class="form-label" for="form3Example1c" id="hide1" style="color:green;"> Email Id</label><label class="form-label" for="form3Example1c" id="hide2"  style="color:red;">*</label>
-                      <input type="email" name="username" id="hide2" class="form-control" placeholder="Email Id">
+                      <label class="form-label" for="form3Example1c" style="color:green;"> Email Id</label><label class="form-label" for="form3Example1c" id="hide2"  style="color:red;">* <span id="output2" style="color: brown;"></span></label> 
+                      <input type="email" name="username" id="hide1" oninput="displayInput2()" class="form-control" placeholder="Email Id">
                     </div>&#160 &#160
                     <div class="form-outline flex-fill mb-2">
-                      <label class="form-label" for="form3Example1c"  id="hide4" style="color:green;"> Confirm Email Id</label><label class="form-label"id="hide5" for="form3Example1c" style="color:red;">*</label>
-                      <input type="email" name="emailid" id="hide3" class="form-control" placeholder="Retype Email Id">
+                      <label class="form-label" for="form3Example1c" style="color:green;"> Confirm Email Id</label><label class="form-label"id="hide5" for="form3Example1c" style="color:red;">*<span id="output3" style="color: brown;"></span> </label>
+                      <input type="email" name="emailid" id="email"  oninput="displayInput3()" class="form-control" placeholder="Retype Email Id">
                     </div>
                     </div>
 
