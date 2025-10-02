@@ -20,4 +20,8 @@ python-dotenv==1.0.1
 sqlparse==0.5.0
 tzdata==2024.1
 whitenoise==6.7.0
-
+install --upgrade certifi
+install --upgrade ssl
+install --upgrade requests
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+ brew install openssl

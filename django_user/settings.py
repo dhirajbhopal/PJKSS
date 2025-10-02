@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 from pathlib import Path
+import certifi
+import ssl 
+import requests
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
@@ -149,10 +153,15 @@ AUTH_USER_MODEL = "core.User"
 
 
 #Email Setup
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
 #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#EMAIL_HOST = 'smtp.gmail.com'
-#EMAIL_USE_TLS = True
-#EMAIL_PORT = 587
-#EMAIL_HOST_USER = 'dhirajdjangopython@gmail.com'
-#EMAIL_HOST_PASSWORD = 'tdilcffbrsczrtva'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'pjkssinfo@gmail.com'
+EMAIL_HOST_PASSWORD = 'bwqpbkcdutyqheoi'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+
 

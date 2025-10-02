@@ -135,4 +135,19 @@ class letterserialno(models.Model):
         return self.serialno
 
 
+# date and time
 
+class Post(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    
+    # created automatically
+    created_at = models.DateTimeField(auto_now_add=True)
+    # updated whenever saved
+    updated_at = models.DateTimeField(auto_now=True)
+
+    # if you want manual datetime
+    event_datetime = models.DateTimeField(null=True, blank=True)
+
+    def __str__(self):
+        return self.title

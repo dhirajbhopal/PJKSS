@@ -27,7 +27,17 @@ from django.core.files.storage import FileSystemStorage
 from num2words import num2words
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.utils import timezone
 
+# Password reset 
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
+import certifi
+import ssl
+import requests
 
 class ProfileView(View):
     if User.is_authenticated:
@@ -280,30 +290,34 @@ def forgotsendotp(request):
 
 
 def resetpass(req):
-    email=req.POST.get("emailid1")
-    print("converted email id",email)
-    encryptedpassword=make_password(req.POST['password'])
-    rpass=User.objects.get(email=email)
-    rpass.password=encryptedpassword
-    rpass.save()
-    message ="""<html><body><h1 style='color:red'>PATEL JAN KALYAN SEVA SAMITI</h1> <hr>Hello Mr."""+email+""",<br><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    You have successfuly reset your password <b><br><br>
-    Visit :- <span style='color:red'> https://pjkss.pythonanywhere.com/login </spna> </b> to login <br>
-    <br><b> Thanks<br><br> Team Cybrom<br>    Bhopal Branch </b></body></html>"""
-    smtp = smtplib.SMTP(host='smtp.gmail.com', port=587) 
-    smtp.starttls()
-    smtp.login("pjkssinfo@gmail.com","bwqpbkcdutyqheoi")
-    msg = MIMEMultipart() 
-    msg['From'] ="PJKSS ADMIN"
-    msg['To'] = email
-    msg['Subject'] = "Password reset Done"
-    msg.attach(MIMEText(message, 'html'))
-    smtp.send_message(msg)
-    smtp.quit()
-    messages.success(req,'Password Changed Successfully')
-    return redirect('login')
-    
+    try:
+        email=req.POST.get("emailid1")
+        print("converted email id",email)
+        encryptedpassword=make_password(req.POST['password'])
+        rpass=User.objects.get(email=email)
+        rpass.password=encryptedpassword
+        rpass.save()
+        message ="""<html><body><h1 style='color:red'>PATEL JAN KALYAN SEVA SAMITI</h1> <hr>Hello Mr."""+email+""",<br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        You have successfuly reset your password <b><br><br>
+        Visit :- <span style='color:red'> https://pjkss.pythonanywhere.com/login </spna> </b> to login <br>
+        <br><b> Thanks<br><br> Team Cybrom<br>    Bhopal Branch </b></body></html>"""
+        smtp = smtplib.SMTP(host='smtp.gmail.com', port=587) 
+        smtp.starttls()
+        smtp.login("pjkssinfo@gmail.com","bwqpbkcdutyqheoi")
+        msg = MIMEMultipart() 
+        msg['From'] ="PJKSS ADMIN"
+        msg['To'] = email
+        msg['Subject'] = "Password reset Done"
+        msg.attach(MIMEText(message, 'html'))
+        smtp.send_message(msg)
+        smtp.quit()
+        messages.success(req,'Password Changed Successfully')
+        return redirect('login')
+    except Exception as ex:
+        messages.success(req,'Sorry, Email id is not register with us')
+        return redirect('login')
+
 
 @login_required
 def addstudentsdata(req):
@@ -1059,5 +1073,6 @@ def gallery1(req):
 
 def gallery2(req):
     return render(req,'gallery2.html')
+
 
 
