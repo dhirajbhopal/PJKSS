@@ -68,7 +68,7 @@ urlpatterns = [
 
 
         # Course view
-    path('course', TemplateView.as_view(template_name='site/courses.html'), name='course'),
+    path('vision', TemplateView.as_view(template_name='site/vision.html'), name='vision'),
 
      # Contact
     path('contact', TemplateView.as_view(template_name='site/contactus.html'), name='contact'),
