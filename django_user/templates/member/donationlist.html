@@ -34,7 +34,6 @@
 <div class="container">
 	<br>
 <input type="text" id="myInputroll" onkeyup="myFunctionroll()" placeholder="Name...." title="Type in a name">
-<input type="text" id="myInputmonth" onkeyup="myFunctionmonth()" placeholder="Amount...." title="Type in a name">
 <table class="showmarks" id="myTable" class="table-bordered container-fluid" align="center">
 	<br><br>
       <tr class="td1" border="1px" align="center" style="background-color:black; color:white;">
@@ -71,18 +70,7 @@
   margin-left: 20px;
   border-radius: 10px;
 }
-#myInputmonth {
-  background-image: url("{% static 'images/searchicon.png' %}");
-  background-position: 10px 10px;
-  background-repeat: no-repeat;
-  width: 20%;
-  font-size: 16px;
-  padding: 12px 20px 12px 40px;
-  border: 1px solid #ddd;
-  margin-bottom: 12px;
-  margin-left: 20px;
-  border-radius: 10px;
-}
+
 
 #myTable {
   border-collapse: collapse;
@@ -105,6 +93,49 @@
   background-color:green;
 }
 </style>
+
+
+<script>
+function myFunctionroll() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInputroll");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+
+<script>
+function myFunctionmonth() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInputmonth");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[2];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
 
 
 <script type="text/javascript">
