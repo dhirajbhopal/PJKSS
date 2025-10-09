@@ -3,6 +3,24 @@
 {% block title %} Donation {% endblock %}
 
 {% block donation %}
+
+<script type="text/javascript">
+
+ function validation() 
+  { 
+    var amount=document.f1.amount.value;
+
+  if (amount=="")
+  {
+    alert("Please enter Amount");
+    document.f1.amount.focus();
+    return false;
+  }
+}
+</script>
+
+
+
 <style type="text/css">
 	input{
 		border:solid red 2px;
@@ -23,17 +41,17 @@
 
 <body>
 	<br>
-	<div class="container">
-	<form action="/donationdetail" method="POST"> 
+	<div class="container w-70">
+	<form name="f1" action="/donationdetail" method="POST" onsubmit="return validation();"> 
 		{% csrf_token %}
 		<table id="generatePdf" align="center" style="border: 5px solid black;" class="rounded rounded-2">
 			<tr>
-			<td colspan="3" style="color:green;">Please fill Amount </td>
+			<td colspan="3" style="color:green;">Please Enter Amount </td>
 
 	</tr>
 	<tr>
 			<td>Amount in Rs.</td>
-		<td><input type="text" value="10000" name="amount"></td>
+		<td><input type="text" value="10000" name="amount" style="width:50%"></td>
 	</tr>
 	<tr>
 		<td colspan="3" align="center"><input style="margin-left: 50px;" type="submit" value="Pay Now"></td>

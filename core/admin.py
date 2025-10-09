@@ -1,7 +1,7 @@
 from django.contrib import admin
 #from student.models import student
 #from faculty.models import faculty
-from core.models import User,studentdetails,studentmarks,studentfee,letterserialno
+from core.models import User,studentdetails,studentmarks,studentfee,letterserialno, donation
 from django.contrib.auth.admin import UserAdmin as DefaultUserAdmin
 
 # Register your models here.
@@ -70,6 +70,11 @@ class studentfeeAdmin(admin.ModelAdmin):
 @admin.register(letterserialno)
 class letterserialnoAdmin(admin.ModelAdmin):
     list_display=['serialno','issuername','issuedto','subject','issuedate']
+
+
+@admin.register(donation)
+class registerAdmin(admin.ModelAdmin):
+    list_display=['name','lastname','address','Amount']
 
 
 

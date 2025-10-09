@@ -5,8 +5,6 @@
 {% block content %} 
 {% if request.user.is_authenticated %}
 {% if user.role == "Student" %}
-<script type="text/javascript" src="{% static 'jquery.js' %}"></script>
-
 <div align="center">
 <form action='feedetail' method="POST" name="f1" onsubmit="return validation();">
       {% csrf_token %}

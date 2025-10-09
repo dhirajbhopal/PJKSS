@@ -151,3 +151,11 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+class donation(models.Model):
+    name=models.CharField(max_length=80)
+    lastname=models.CharField(max_length=80)
+    address=models.CharField(max_length=80)
+    Amount=models.CharField(max_length=80)
+
+

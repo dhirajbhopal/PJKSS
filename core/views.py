@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from django.urls import reverse
 from django.views import View
-from core.models import User,studentdetails,studentmarks,studentfee,letterserialno
+from core.models import User,studentdetails,studentmarks,studentfee,letterserialno,donation
 from django.conf import settings
 from django.contrib import messages
 from django.db.utils import IntegrityError
@@ -1102,5 +1102,12 @@ def donationdetail(request):
         return render(request,'site/donationqr.html',{'qr_image_base64':qr_image_base64,})
     else:
         return render(request,'site/donation.html')
+
+
+
+def donationlist(req):
+    donationdetails=donation.objects.all()
+    return render(req,'member/donationlist.html',{'donationdetails':donationdetails})
+
 
 

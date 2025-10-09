@@ -25,6 +25,11 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+  <script type="text/javascript" src="{% static 'jquery.js' %}"></script>
+  <script type="text/javascript" src="{% static 'jquery.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
 <!--<meta http-equiv="refresh" content="180">-->
 <style>
   <div style="overflow-x:auto;">
@@ -288,27 +293,32 @@ table, th, td {
   <a href="{% url 'contact' %}"><i class="fa fa-phone faicon" aria-hidden="true"></i> Contact Us</a>
   <a href="{% url 'vision' %}"><i class="fa fa-book" aria-hidden="true"></i> Vision</a>
   <a href="{% url 'about' %}"><i class="fa fa-info-circle faicon" aria-hidden="true"></i>About</a>
-  <a href="{% url 'donation' %}"><i class="fa fa-info-circle faicon" aria-hidden="true"></i>Donation</a>
+  <a href="{% url 'donation' %}" style="color:red">Donation</a>
 
   <!-------Start Admin Login---->
   {% if request.user.is_authenticated %}
-     <span style="float: right; color:red; padding-top: 15px;  padding-right: 20px;" > <img src="{{user.image.url}}" style="border-radius:20px;" height="25px"> </span>
+     <span style="float: right; color:red; padding-top: 15px;  padding-right: 20px;" > <img src="{{user.image.url}}" style="border-radius:10px;" height="25px"> </span>
      <span style="float: right; color: white; padding-top: 15px;"> {{user.role}}&#160 </span>
-    <span style="float: right; color: white; padding-top: 15px;" type="button"data-bs-toggle="dropdown" aria-expanded="false"> {{user.first_name}} {{user.last_name}} :&#160</span>
-     <ul class="dropdown-menu border-0 text-center rounded rounded-3" style="background-color: rgba(254, 185, 185,0.93);">
-      <table>
+    <span style="float: right; color: white; padding-top: 15px;" type="button"data-bs-toggle="dropdown" aria-expanded="false"> {{user.first_name}} {{user.last_name}} :&#160</span><br>
+     <ul class="dropdown-menu border-0 text-center rounded rounded-3 m-0 p-0" style="background-color: rgba(254, 185, 185,0.93);">
+      <table class="m-0 p-0">
     <tr>
-    <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:20px;" href="{% url 'logout' %}">
-      <img src="{% static 'menuimages/logout.png' %}" height="50px"></a></td>
-    <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:20px;" href="{% url 'change_password' %}">
-      <img src="{% static 'menuimages/changepass.png' %}" height="50px"></a></td>
+    <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:15px;" href="{% url 'logout' %}">
+      Logout</a></td>
+    </tr>
+      <tr>
+    <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:15px;" href="{% url 'change_password' %}">
+      Change Password</a></td></tr>
   </tr>
   <tr>
-    <td><a href="{% url 'profile' %}" class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:20px;">
-      <img src="{% static 'menuimages/editprofile.png' %}" height="50px"></a></a></td>
-    <td ><a href="{% url 'imageview' %}" class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:20px;">
-      <img src="{% static 'menuimages/updateimage.png' %}" height="50px"></a></td>
+    <td><a href="{% url 'profile' %}" class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:15px;">
+      Update Profile</a></a></td>
     </tr>
+     <tr>
+    <td ><a href="{% url 'imageview' %}" class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:15px;">
+    Update Image</a></td>
+    </tr>
+      <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:15px;" href="donationlist">Show Donation List</a></td>
 
     <!------- Start Studnet Login---->
      {% if user.role == "Student" %}
@@ -316,13 +326,15 @@ table, th, td {
     <td><form action="viewresult" method="POST">
       {% csrf_token %}
        <input type="hidden" name="email" value="{{user.email}}">
-       <button class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:20px;">Marksheet</button>
+       <button class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:15px;">Marksheet</button>
         </form></td>
+      </tr>
+      <tr>
          <td>
         <form action="studentfeecard" method="GET">
       {% csrf_token %}
        <input type="hidden" name="rollno" value="{{user.rollno}}">
-       <button class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:20px;">Fee Card</button>
+       <button class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:15px;">Fee Card</button>
         </form>
          </td>
          <tr>
@@ -332,34 +344,38 @@ table, th, td {
        <!------- Start Admin Login---->
  {% if user.role == "Admin" %}
  <tr>
-    <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:20px;" href="{% url 'addstu' %}">
-    <img src="{% static 'menuimages/addstu.png' %}" height="50px"></a></td>
-    <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:20px;" href="{% url 'showstu' %}">
-      <img src="{% static 'menuimages/showstu.png' %}" height="50px"></a></td>
+    <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:15px;" href="{% url 'addstu' %}">
+    Add Student</a></td>
+  </tr>
+    <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:15px;" href="{% url 'showstu' %}">
+      Show Students</a></td>
   </tr>
   <tr>
-    <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:20px;" href="#">
-      <img src="{% static 'menuimages/showfac.png' %}" height="50px"></a></td>
-      <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:20px;" href="{% url 'showmarks' %}">
-      <img src="{% static 'menuimages/showfacs.png' %}" height="50px">Marks</a></td> </tr>
+    <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:15px;" href="#">
+      Show Member</a></td>
+    </tr>
+    <tr>
+      <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:15px;" href="{% url 'showmarks' %}">
+      Marks</a></td> </tr>
       <tr>
-      <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:20px;" href="{% url 'addmarks' %}">
-      <img src="{% static 'menuimages/showfacs.png' %}" height="50px">AddMarks</a></td>
-      <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:20px;" href="feeupload">
-      <img src="{% static 'menuimages/showfacs.png' %}" height="50px">Fee Detail</a></td></tr>
+      <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:15px;" href="{% url 'addmarks' %}">
+      AddMarks</a></td></tr>
+     <tr>
+      <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:15px;" href="feeupload">
+      Fee Detail</a></td></tr>
       <tr>
-      <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:20px;" href="addserialno">
-      <img src="{% static 'menuimages/showfacs.png' %}" height="50px">Add Serial No</a></td>
+      <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:15px;" href="addserialno">
+      Add Serial No</a></td>
   </tr>
   {% endif %}
       <!-------End Admin Login---->
 
        <!------- Start Faculty Login---->
 
-      {% if user.role == "Faculty" %}
+      {% if user.role == "Member" %}
  <tr>
-    <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:20px;" href="#">Show Attendance</a></td>
-    <td>1</td>
+    <td></a></td>
+    <td></td>
    </tr>
       {% endif %}
       <!------- End Faculty Login---->
@@ -398,7 +414,6 @@ function myFunction() {
 {% block gallery2 %} {% endblock %}
 {% block donation %} {% endblock %}
 {% block donationqr %} {% endblock %}
-    <!------End of Menu Part---->
 {% block content %} {% endblock content %}
 {% block sms %}
 <table align="center">
