@@ -53,6 +53,7 @@ urlpatterns = [
     path('editserialno', views.editserialno),
     path('gallery1', views.gallery1),
     path('gallery2', views.gallery2),
+    path('donationdetail', views.donationdetail),
     path('logout', views.logoutUser, name="logout"),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

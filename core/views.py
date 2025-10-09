@@ -28,6 +28,13 @@ from num2words import num2words
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.utils import timezone
+import qrcode
+from PIL import Image
+from io import BytesIO
+import base64
+from django.core.files.uploadedfile import InMemoryUploadedFile
+import pyqrcode
+import png
 
 # Password reset 
 from django.contrib.auth.tokens import default_token_generator
@@ -38,6 +45,7 @@ from django.core.mail import send_mail
 import certifi
 import ssl
 import requests
+
 
 class ProfileView(View):
     if User.is_authenticated:
@@ -1074,5 +1082,25 @@ def gallery1(req):
 def gallery2(req):
     return render(req,'gallery2.html')
 
+def donate(req):
+    return render(req,'donate.html')
+
+
+def donationdetail(request):
+    if request.method=="POST":
+        context = {}
+        amount=request.POST.get("amount")
+        qr_text = "upi://pay?pa=dhirajpatel08@okaxis&pn=DHIRAJ%20PATEL&am="+amount+".00&cu=INR&aid=uGICAgID1xJq5DA"
+        qr_image = qrcode.make(qr_text, box_size=15)
+        qr_image_pil = qr_image.get_image()
+        stream = BytesIO()
+        qr_image_pil.save(stream, format='PNG')
+        qr_image_data = stream.getvalue()
+        qr_image_base64 = base64.b64encode(qr_image_data).decode('utf-8')
+        context['qr_image_base64'] = qr_image_base64
+        context['variable'] = qr_text
+        return render(request,'site/donationqr.html',{'qr_image_base64':qr_image_base64,})
+    else:
+        return render(request,'site/donation.html')
 
 

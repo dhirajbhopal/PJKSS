@@ -76,6 +76,9 @@ urlpatterns = [
     # about view
     path('about', TemplateView.as_view(template_name='site/about.html'), name='about'),
 
+    # donnation view
+    path('donation', TemplateView.as_view(template_name='site/donation.html'), name='donation'),
+
     path('checkmail/', TemplateView.as_view(template_name='site/mail.html'), name='checkmail'),
  
 ]

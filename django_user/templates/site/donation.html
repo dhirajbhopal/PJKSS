@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block title %} Donation {% endblock %}
+
+{% block donation %}
+<style type="text/css">
+	input{
+		border:solid red 2px;
+		margin: 5px;
+		border-radius: 10px;
+	}
+	td{
+		padding-left: 10px;
+		font-size: 20px;
+		font-weight: bolder;
+	}
+	select{
+		border:solid red 2px;
+		margin: 5px;
+		border-radius: 10px;
+	}
+</style>
+
+<body>
+	<br>
+	<div class="container">
+	<form action="/donationdetail" method="POST"> 
+		{% csrf_token %}
+		<table id="generatePdf" align="center" style="border: 5px solid black;" class="rounded rounded-2">
+			<tr>
+			<td colspan="3" style="color:green;">Please fill Amount </td>
+
+	</tr>
+	<tr>
+			<td>Amount in Rs.</td>
+		<td><input type="text" value="10000" name="amount"></td>
+	</tr>
+	<tr>
+		<td colspan="3" align="center"><input style="margin-left: 50px;" type="submit" value="Pay Now"></td>
+	</tr>
+	</table>
+</form>
+</div>
+{% endblock %}
+ {% block mainbody %} {% endblock %}

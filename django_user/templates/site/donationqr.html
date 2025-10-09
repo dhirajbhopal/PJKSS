@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block title %} DonationQR {% endblock %}
+
+{% block donationqr %}
+<style type="text/css">
+	input{
+		border:solid red 2px;
+		margin: 5px;
+		border-radius: 10px;
+	}
+	td{
+		padding-left: 10px;
+		font-size: 20px;
+		font-weight: bolder;
+	}
+	select{
+		border:solid red 2px;
+		margin: 5px;
+		border-radius: 10px;
+	}
+</style>
+<body>
+	<br>
+		<table align="center">
+			<tr align="center"><td>
+        {% if qr_image_base64 %}
+        <img src="data:image/png;base64,{{qr_image_base64 }}" height="200px"> 
+        {% endif %}
+    </td>
+        </tr>
+        <tr><td>
+
+        <span style="color:green; font-size:30px;"> Scan this QR Code with any UPI App and Pay</span><br>
+    <span style="color:red; font-size:15px;">Or You can Pay on 7869527457 (Dhiraj Patel) from G-pay, Phone-Pay and Amazon-Pay UPI</span><br>
+    <span style="font-size:15px;">After payent done, send payment slip to give unber of in Whatsapp Group with Namme and Address, So thet we can save your record</span><br>
+   <span style="font-size:15px;"><a href="https://chat.whatsapp.com/GlQpIdvAhgG4vyVUo0ZW0N"> Patel Smarak Whatsapp Group link</a></span>
+</td></tr>
+
+
+       
+	<form action="/donationdetail" method="GET"> 
+	
+        	<tr>
+        		<td align="center"><br>
+        <button style="color:red;">Pay Again</button> </td>
+    </form>
+    </tr>
+    </table>
+    </div>
+{% endblock %}
+ {% block mainbody %} {% endblock %}
