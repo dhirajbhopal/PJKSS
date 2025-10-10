@@ -1099,7 +1099,7 @@ def donationdetail(request):
         qr_image_base64 = base64.b64encode(qr_image_data).decode('utf-8')
         context['qr_image_base64'] = qr_image_base64
         context['variable'] = qr_text
-        return render(request,'site/donationqr.html',{'qr_image_base64':qr_image_base64,})
+        return render(request,'site/donationqr.html',{'qr_image_base64':qr_image_base64,"qr_text":qr_text})
     else:
         return render(request,'site/donation.html')
 
