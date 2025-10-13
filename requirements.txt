@@ -1,0 +1,40 @@
+django-payments
+razorpay
+tablib
+import_export
+openpyxl
+pandas
+num2words
+pyqrcode
+qrcode 
+pytz==2023.3.post1
+Django==5.0.6
+django-appconf==1.0.6
+django-imagekit==5.0.0
+django-multiselectfield==0.1.13
+gunicorn==23.0.0
+packaging==24.1
+pilkit==3.0
+pillow==10.3.0
+python-dotenv==1.0.1
+sqlparse==0.5.0
+tzdata==2024.1
+whitenoise==6.7.0
+Flask
+urlencode 
+uuid
+dotenv
+geoip2   (device location)
+pyyaml user-agents
+django-login-history2
+django-location-field
+decorators 
+djangorestframework
+cryptography
+install --upgrade certifi
+install --upgrade ssl
+install --upgrade requests
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+ brew install openssl
+
+ https://github.com/dhirajbhopal/PJKSS.git

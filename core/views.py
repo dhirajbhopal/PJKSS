@@ -1,0 +1,409 @@
+from django.shortcuts import render, redirect, HttpResponse,HttpResponseRedirect
+from django.http import JsonResponse
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, UpdateView
+from core.forms import SignUpForm, ProfileForm,ImgForm
+from django.contrib.auth.models import User
+from django.contrib import auth
+from django.urls import reverse
+from django.views import View
+from core.models import User,letterserialno,donation
+from django.conf import settings
+from django.contrib import messages
+from django.db.utils import IntegrityError
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import check_password
+import smtplib
+import os
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from random import randint
+import openpyxl
+import pandas as pd
+from django.conf import settings 
+#from rest_framework import generics
+#from import_export import resources
+from django.core.files.storage import FileSystemStorage
+from num2words import num2words
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
+from django.utils import timezone
+from PIL import Image
+import base64
+from django.core.files.uploadedfile import InMemoryUploadedFile
+import pyqrcode
+import png
+# upi Payennet down
+from flask import Flask, redirect, request
+from urllib.parse import urlencode
+import uuid
+from django.shortcuts import render, get_object_or_404, redirect
+from .utils import build_upi_deeplink
+from io import BytesIO
+from django.urls import reverse
+import qrcode
+# Password reset 
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
+import certifi
+import ssl
+import requests
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+
+class ProfileView(View):
+    if User.is_authenticated:
+        def get(self, request):
+            form = ProfileForm(request.POST)
+            return render(request,'commons/profile.html',{'form':form})
+
+class ProfileUpdate(UpdateView):
+    if User.is_authenticated:
+        model = User
+        form_class = ProfileForm
+        success_url = reverse_lazy('home')
+        template_name = 'commons/profile.html'
+
+class Imageview(View):
+    if User.is_authenticated:
+        def get(self, request):
+            form = ImgForm(request.POST)
+            return render(request,'commons/imageupdate.html',{'form':form})
+
+class mysingup(View):
+
+    def get(self,request):
+        try:
+            return render(request,'commons/signup.html')
+        except Exception as ex:
+            msg="signup form not found"
+            return render(request,'base.html',{'msg':msg})
+
+# delete old profile after uploading new profile
+
+@login_required
+def Imageupdate(req):
+    try:
+        email = req.POST.get("email")
+        img2 = User.objects.get(email=email)
+
+        # ---- delete previous image if exists ----
+        if img2.image:   # assuming your User model has an image field
+            if os.path.isfile(img2.image.path):
+                os.remove(img2.image.path)
+
+        # ---- save new image ----
+        img2.image = req.FILES['image']
+        img2.save()
+
+        msg = "Profile photo changed Successfully"
+        messages.success(req, msg)
+        return redirect('/')
+    except Exception as ex:
+        print("Error while updating image:", ex)
+        messages.error(req, "Something went wrong while updating image")
+        return redirect('/')
+
+
+
+class forgotpassword(View):
+
+    def get(self,request):
+        return render(request,'commons/forgotpass.html')
+
+class signuptask(View):
+
+    def get(self,request):
+        code = 0
+        try:
+            encryptedpassword=make_password(request.GET['password'])
+            global emailuser
+            emailuser = request.GET.get("emailid")
+            ob=User()
+            ob.username=request.GET.get("username")
+            ob.mobileno=request.GET.get("mobileno")
+            ob.email=request.GET.get("emailid")
+            ob.first_name=request.GET.get("name")
+            ob.last_name=request.GET.get("name1")
+            ob.password=encryptedpassword
+            ob.gender=request.GET.get("gender")
+            ob.address=request.GET.get("address")
+            ob.save()
+        except IntegrityError as ex:          
+            code = 1
+            messages.success(request,'Email is Already Registered! need to reset password')
+            return redirect('login')
+        except Exception as ex:       
+            code = 2
+            messages.success(request,'Email id does not exist !')
+            return render(request,'commons/signup.html')
+        return redirect("/cheksignup?err="+str(code))
+
+
+def cheksignup(req):
+    code = req.GET.get("err")
+    msg = ""
+    if code=="0":
+        message ="""<html><body><h1 style='color:red'>PATEL JAN KALYAN SEVA SAMITI</h1> <hr>Hello Mr. Dhiraj Patel Admin <br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        One New User has registered, Please assign his/her Role and Roll No. <b><br>
+        User Eamil id is:- """+emailuser+"""<br><br>
+        Visit :- <span style='color:red'> https://pjkss.pythonanywhere.com/pateladminlogin/?next=/pateladminlogin </spna> </b> to login <br>
+        <br><b> Thanks<br><br> Patel Jan Kalyan Seva Samiti <br>  Head Office Dehri </b></body></html>"""
+        smtp = smtplib.SMTP(host='smtp.gmail.com', port=587)
+        smtp.starttls()
+        smtp.login("pjkssinfo@gmail.com","bwqpbkcdutyqheoi")
+        msg = MIMEMultipart() 
+        msg['From'] ="PJKSS ADMIN"
+        msg['To'] = "dhirajpatel08@gmail.com"
+        msg['Subject'] = "New Registeration"
+        msg.attach(MIMEText(message, 'html'))
+        smtp.send_message(msg)
+        smtp.quit()
+        message ="""<html><body><h1 style='color:red'>PATEL JAN KALYAN SEVA SAMITI</h1> <hr>Hello Mr. """+emailuser+""" <br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Your Registration is Successfull <b><br>
+        Your User id is:- """+emailuser+"""<br><br>
+        Visit :- <span style='color:red'> https://pjkss.pythonanywhere.com/login </spna> </b> to login <br>
+        <br><b> Thanks<br><br> Patel Jan Kalyan Seva Samiti <br>  Head Office Dehri </b></body></html>"""
+        smtp = smtplib.SMTP(host='smtp.gmail.com', port=587)
+        smtp.starttls()
+        smtp.login("pjkssinfo@gmail.com","bwqpbkcdutyqheoi")
+        msg = MIMEMultipart() 
+        msg['From'] ="PJKSS ADMIN"
+        msg['To'] = emailuser
+        msg['Subject'] = "Registration is Successfull"
+        msg.attach(MIMEText(message, 'html'))
+        smtp.send_message(msg)
+        smtp.quit()
+        messages.success(req,"Registeration Done Successfully")
+        return redirect('login')
+    if code=="1":
+        messages.success(req,'Email is Already Registered !')      
+    if code=="2":
+        messages.success(req,'Registeration Failed !')     
+    return render(req,'commons/signup.html')
+
+def generateOTP(n):
+    range_start = 10**(n-1)
+    range_end = (10**n)-1
+    return randint(range_start, range_end)
+
+
+def sendmail(email,otp):
+    try:
+        print("mail iniitializing")
+        message ="""<html><body><h1 style='color:red'>PATEL JAN KALYAN SEVA SAMITI</h1> <hr>Hello Mr. {0},<br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Please enter otp to complete your registration <b><br><br>
+        Your OTP is :- <span style='color:red'>  {1} </spna> </b> please don't share to anyone.<br>
+        <br><b> Thanks<br><br> Patel Jan Kalyan Seva Samiti <br>  Head Office Dehri </b></body></html>""".format(email,otp)
+        smtp = smtplib.SMTP(host='smtp.gmail.com', port=587)
+        smtp.starttls()
+        smtp.login("pjkssinfo@gmail.com","bwqpbkcdutyqheoi")
+        msg = MIMEMultipart() 
+        msg['From'] ="PJKSS ADMIN"
+        msg['To'] = email
+        msg['Subject'] = "Registration OTP"
+        msg.attach(MIMEText(message, 'html'))
+        smtp.send_message(msg)
+        smtp.quit()     
+        return True
+    except Exception as ex:       
+        return False
+
+
+def sendotp(request):
+    email = request.GET.get("email")
+    print("your mail is+++++ ",email)
+    if len(email)>0:
+        email = email
+        otp = generateOTP(6)
+        print("your OTP is+++++ ",otp)
+        check = sendmail(email,otp)
+        print("sending mail+++++ ")
+        request.session['loginotp'] = otp
+        return HttpResponse("OTP Send Successfully! "+str(otp)+" ")
+    else:
+        return HttpResponse("OTP Send Failed, Please Try Again  !")           
+                
+    return HttpResponse("Email Id Not Exist !")
+
+
+
+def forgotsendmail(email,otp):
+    try:
+        print("mail iniitializing")
+        message ="""<html><body><h1 style='color:red'>PATEL JAN KALYAN SEVA SAMITI</h1> <hr>Hello Mr. {0},<br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Please enter otp to reset your password <b><br><br>
+        Your OTP is :- <span style='color:red'>  {1} </spna> </b> please don't share to anyone.<br>
+        <br><b> Thanks<br><br> Patel Jan Kalyan Seva Samiti <br>  Head Office Dehri </b></body></html>""".format(email,otp)
+        smtp = smtplib.SMTP(host='smtp.gmail.com', port=587) 
+        smtp.starttls()
+        smtp.login("pjkssinfo@gmail.com","bwqpbkcdutyqheoi")
+        msg = MIMEMultipart() 
+        msg['From'] ="PJKSS ADMIN"
+        msg['To'] = email
+        msg['Subject'] = "Password reset OTP"
+        msg.attach(MIMEText(message, 'html'))
+        smtp.send_message(msg)
+        smtp.quit()     
+        return True
+    except Exception as ex:       
+        return False
+
+
+def forgotsendotp(request):
+    email = request.GET.get("email")
+    print("your mail is+++++ ",email)
+    if len(email)>0:
+        email = email
+        otp = generateOTP(6)
+        print("your OTP is+++++ ",otp)
+        check = forgotsendmail(email,otp)
+        print("sending mail+++++ ")
+        request.session['loginotp'] = otp
+        return HttpResponse("OTP Send Successfully! "+str(otp)+" ")
+    else:
+        return HttpResponse("OTP Send Failed, Please Try Again  !")           
+                
+    return HttpResponse("Email Id Not Exist !")
+
+
+def resetpass(req):
+    try:
+        email=req.POST.get("emailid1")
+        print("converted email id",email)
+        encryptedpassword=make_password(req.POST['password'])
+        rpass=User.objects.get(email=email)
+        rpass.password=encryptedpassword
+        rpass.save()
+        message ="""<html><body><h1 style='color:red'>PATEL JAN KALYAN SEVA SAMITI</h1> <hr>Hello Mr."""+email+""",<br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        You have successfuly reset your password <b><br><br>
+        Visit :- <span style='color:red'> https://pjkss.pythonanywhere.com/login </spna> </b> to login <br>
+        <br><b> Thanks<br><br> Patel Jan Kalyan Seva Samiti <br>  Head Office Dehri </b></body></html>"""
+        smtp = smtplib.SMTP(host='smtp.gmail.com', port=587) 
+        smtp.starttls()
+        smtp.login("pjkssinfo@gmail.com","bwqpbkcdutyqheoi")
+        msg = MIMEMultipart() 
+        msg['From'] ="PJKSS ADMIN"
+        msg['To'] = email
+        msg['Subject'] = "Password reset Done"
+        msg.attach(MIMEText(message, 'html'))
+        smtp.send_message(msg)
+        smtp.quit()
+        messages.success(req,'Password Changed Successfully')
+        return redirect('login')
+    except Exception as ex:
+        messages.success(req,'Sorry, Email id is not register with us')
+        return redirect('login')
+
+
+def logoutUser(request):
+    logout(request)
+    return redirect('login')
+
+
+
+def addserialno(req):
+    return render(req,'adminrole/addserialno.html')
+
+@login_required
+def letterno(request):
+    try:
+        if request.method == 'POST' and request.FILES['myfile']:      
+            myfile = request. FILES['myfile']
+            fs = FileSystemStorage()
+            filename = fs.save(myfile.name, myfile)
+            uploaded_file_url = fs.url(filename)              
+            empexceldata = pd.read_excel(filename)        
+            dbframe = empexceldata
+            for dbframe in dbframe.itertuples():
+                obj = letterserialno.objects.create(serialno=dbframe.serialno,issuername=dbframe.issuername,issuedto=dbframe.issuedto,
+                    subject=dbframe.subject,issuedate=dbframe.issuedate)           
+                obj.save()
+                messages.success(request,'Data Uploded Successfully')
+        return HttpResponseRedirect('/addserialno')
+    except IntegrityError as ex:
+        messages.success(request,'Serial No Already Exist')
+        return redirect('/addserialno')
+    except Exception as ex:
+        messages.success(request,'Header mismatch in exel sheet')       
+        return redirect('/addserialno')
+
+
+
+def searchserialno(req):
+    serialno=req.POST.get("serialno")
+    serial=letterserialno.objects.filter(serialno=serialno)
+    for i in serial:
+        if( i.serialno!=serialno):
+            messages.success(req,"Serial No. Not Found")   
+        else:
+            serial=letterserialno.objects.filter(serialno=serialno)
+            return render(req,'adminrole/searchserialno.html',{'serial':serial})   
+    messages.success(req,"Serial No. Not Found")  
+    return render(req,'adminrole/searchserialno.html')
+
+
+
+
+@login_required
+def editserialno(req):
+    if req.method=="GET":
+        serialno=req.GET.get("serialno")
+        serialdata=letterserialno.objects.get(serialno=serialno)
+        serialdata=letterserialno.objects.filter(serialno=serialno)
+        return render(req,'adminrole/editserialno.html',{'serialdata':serialdata})
+    else:
+        serialno=req.POST.get("serialno")
+        modstu3=letterserialno.objects.get(serialno=serialno)
+        modstu3.issuedto=req.POST.get("issuedto")
+        modstu3.subject=req.POST.get("subject")
+        modstu3.issuedate=req.POST.get("issuedate")
+        modstu3.save()
+        messages.success(req,"Letter Serial No.  Data Updated ") 
+        return render(req,'adminrole/addserialno.html')
+
+
+def gallery1(req):
+    return render(req,'gallery1.html')
+
+
+def gallery2(req):
+    return render(req,'gallery2.html')
+
+def donate(req):
+    return render(req,'donate.html')
+
+
+def donationdetail(request):
+    if request.method=="POST":
+        context = {}
+        amount=request.POST.get("amount")
+        qr_text = "upi://pay?pa=dhirajpatel08@okaxis&pn=DHIRAJ%20PATEL&am="+amount+"&cu=INR&aid=uGICAgID1xJq5DA"
+        qr_image = qrcode.make(qr_text, box_size=15)
+        qr_image_pil = qr_image.get_image()
+        stream = BytesIO()
+        qr_image_pil.save(stream, format='PNG')
+        qr_image_data = stream.getvalue()
+        qr_image_base64 = base64.b64encode(qr_image_data).decode('utf-8')
+        context['qr_image_base64'] = qr_image_base64
+        context['variable'] = qr_text
+        upilinkPTM="https://mercury-uat.phonepe.com/transact/uat_v2?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVzT24iOjE3NjAxODUwMzU2MTUsIm1lcmNoYW50SWQiOiJNMjNEMExMSEpGSUZOIiwibWVyY2hhbnRPcmRlcklkIjoiT01QTDI1MTAxMTExMTcxNTYxMzUyODYwMTIifQ.smreWX7rPu8g6SJwVi3l9HpeINGHwAsR3zW2N_muEAA"
+        return render(request,'site/donationqr.html',{'qr_image_base64':qr_image_base64,"upilinkPTM":upilinkPTM})
+    else:
+        return render(request,'site/donation.html')
+
+
+
+def donationlist(req):
+    donationdetails=donation.objects.all()
+    return render(req,'member/donationlist.html',{'donationdetails':donationdetails})
+
