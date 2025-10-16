@@ -49,7 +49,7 @@ class CustomUserManager(BaseUserManager):
 class User(AbstractUser):
     username = models.CharField(max_length=50, unique=True, blank=False ,null=False)
     email = models.EmailField(unique=True,null=False)
-    image=models.ImageField(upload_to=filepathadmin,null=True,blank=True,default='static/images/PATEL_LOGO.png')
+    image=models.ImageField(upload_to=filepathadmin,null=True,blank=True,default='staticfiles/images/PATEL_LOGO.png')
     mobileno=models.CharField(max_length=15,null=True,blank=True)
     gender=models.CharField(max_length=15,null=True,blank=True)
     role=models.CharField(max_length=30,null=True,blank=True)
@@ -95,7 +95,7 @@ class donation(models.Model):
     name=models.CharField(max_length=80)
     lastname=models.CharField(max_length=80)
     address=models.CharField(max_length=80)
-    Amount=models.CharField(max_length=80)
+    Amount=models.IntegerField()
 
 
 

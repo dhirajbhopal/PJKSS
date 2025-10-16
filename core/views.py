@@ -53,6 +53,7 @@ import ssl
 import requests
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.db.models import Sum
 
 
 class ProfileView(View):
@@ -405,5 +406,6 @@ def donationdetail(request):
 
 def donationlist(req):
     donationdetails=donation.objects.all()
-    return render(req,'member/donationlist.html',{'donationdetails':donationdetails})
+    total_amount = donationdetails.aggregate(total=Sum('Amount'))['total']
+    return render(req,'member/donationlist.html',{'donationdetails':donationdetails, 'total_amount' :total_amount})
 
