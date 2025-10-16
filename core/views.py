@@ -359,21 +359,25 @@ def searchserialnoall(req):
 
 @login_required
 def editserialno(req):
-    if req.method=="GET":
-        code=req.GET.get("serialno")
-        serialdata=UniqueCode.objects.get(code=code)
-        serialdata=UniqueCode.objects.filter(code=code)
-        return render(req,'adminrole/editserialno.html',{'serialdata':serialdata})
-    else:
-        code=req.POST.get("serialno")
-        modstu3=UniqueCode.objects.get(code=code)
-        modstu3.issuedto=req.POST.get("issuedto")
-        modstu3.subject=req.POST.get("subject")
-        modstu3.issuedate=req.POST.get("issuedate")
-        modstu3.issuername=req.POST.get("issuername")
-        modstu3.save()
-        messages.success(req,"Serial No Updated ") 
-        return redirect('/searchserialno')
+    try:
+        if req.method=="GET":
+            code=req.GET.get("serialno")
+            serialdata=UniqueCode.objects.get(code=code)
+            serialdata=UniqueCode.objects.filter(code=code)
+            return render(req,'adminrole/editserialno.html',{'serialdata':serialdata})
+        else:
+            code=req.POST.get("serialno")
+            modstu3=UniqueCode.objects.get(code=code)
+            modstu3.issuedto=req.POST.get("issuedto")
+            modstu3.subject=req.POST.get("subject")
+            modstu3.issuedate=req.POST.get("issuedate")
+            modstu3.issuername=req.POST.get("issuername")
+            modstu3.save()
+            messages.success(req,"Serial No Updated ") 
+            return redirect('/searchserialno')
+    except Exception as ex:
+        messages.success(req,"Please fill corrcet Date ") 
+        return redirect('/addserialno')
 
 
 def gallery1(req):

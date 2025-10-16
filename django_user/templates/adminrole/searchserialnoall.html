@@ -15,8 +15,7 @@
 }
 
 .td1 {
-  text-align: left;
-  padding: 1px;
+  text-align: center;
   border: 1px solid red;"
 }
 
@@ -31,24 +30,24 @@
         }
 
 </style>
- <a href="searchserialno"class="btn btn-outline-danger m-3"  style="color:black; font-size:15px;">Back</a>
+<button class="btn btn-outline-danger m-3" onclick="history.back()">Go Back</button>
 <div class="container-fluid">
 <table class="showmarks" id="myTable" class="table-bordered container-fluid" align="center">
       <tr class="td1" border="1px" align="center" style="background-color:black; color:white;"> 
-                      <th>Serial No</th>
-                      <th>Letter Head Person Name</th>
-                      <th>Issue To</th>
-                      <th>Subject</th>
-                      <th>Date</th>
-                      <th>Update</th>
+                      <th class="td1">Serial No</th>
+                      <th class="td1">Letter Head Person Name</th>
+                      <th class="td1">Issue To</th>
+                      <th class="td1">Subject</th>
+                      <th class="td1">Date</th>
+                      <th class="td1">Update</th>
                     </tr>
                     {% for i in serialall %}
                       <tr class="td1" border="2" align="center">
-                      <td>{{i.code}}</td>
-                      <td>{{i.issuername}}</td>  
-                       <td>{{i.issuedto}}</td>
-                        <td>{{i.subject}}</td>
-                        <td>{{i.issuedate}}</td>
+                      <td class="td1">{{i.code}}</td>
+                      <td class="td1">{{i.issuername}}</td>  
+                       <td class="td1">{{i.issuedto}}</td>
+                        <td class="td1">{{i.subject}}</td>
+                        <td class="td1">{{i.issuedate}}</td>
                       <td> <form action="editserialno" method="GET">
                           {% csrf_token %}
                           <input type="hidden" name="serialno" value="{{i.code}}">

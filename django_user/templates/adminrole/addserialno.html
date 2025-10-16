@@ -22,7 +22,7 @@
 <script type="text/javascript">
   $(document).ready(function(){
      $("#dflex").click(function(){
-     var proceed = confirm("Do you sure you want to Generate Serian No");
+     var proceed = confirm("Do you want to Generate Serian No");
 
     if (proceed) 
     {     return true;
@@ -103,7 +103,7 @@ function validation()
 {% block sms %} {% endblock %}
   {% if messages %}
     {% for message in messages %}
-        <span style="color: green; margin-left: 20px;"><i class="fa fa-exclamation-triangle" aria-hidden="true" style='font-size:30px;color:green;margin-top: 10px;"'></i>{{message}}</span>
+        <span style="color: red; margin-left: 20px;"><i class="fa fa-exclamation-triangle" aria-hidden="true" style='font-size:30px;color:red;margin-top: 10px;"'></i>{{message}}</span>
     {% endfor %}
 {% endif %}
 
