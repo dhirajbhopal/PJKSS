@@ -10,9 +10,31 @@
       {% csrf_token %}
   <span style="margin:20px;"> Serial No </span> <input type="text" name="serialno" style="margin:10px;">
 <button  class="btn btn-info btn-outline-danger" style="color:black; font-size:15px;">Search</button>
+<a href="searchserialnoall"class="btn btn-outline-danger m-3"  style="color:black; font-size:15px;">View All</a>
 </form>
+<form action="generate_unique_code" method="POST">
+  {% csrf_token %}
+  <button class="btn btn-outline-danger" id="dflex" style="color:black; font-size:15px;">Generate Serial Number</button>
+</form>
+ <br>
 
 
+<script type="text/javascript">
+  $(document).ready(function(){
+     $("#dflex").click(function(){
+     var proceed = confirm("Do you sure you want to Generate Serian No");
+
+    if (proceed) 
+    {     return true;
+   } 
+   
+   else 
+   {
+    return false
+    }
+    });
+   });
+  </script>
 
 <style>
 .showmarks {
@@ -50,7 +72,7 @@
                       <th>Update</th>
                     </tr>
                       <tr class="td1" border="2" align="center">
-                      <td>{{i.serialno}}</td>
+                      <td>{{i.code}}</td>
                       <td>{{i.issuername}}</td>  
                        <td>{{i.issuedto}}</td>
                         <td>{{i.subject}}</td>
@@ -71,12 +93,13 @@ function validation()
 
     if(serialno=="")
       {
-      alert("Please Enter Roll No");
+      alert("Please Enter serial No");
       return false;
     }
 
 }
   </script>
+
 {% block sms %} {% endblock %}
   {% if messages %}
     {% for message in messages %}
@@ -84,18 +107,6 @@ function validation()
     {% endfor %}
 {% endif %}
 
-                
-                    <div class="form-outline flex-fill mb-2 w-25 p-2" align="center">
-                       <form action="letterno" method="POST" enctype="multipart/form-data">
-                      {% csrf_token %}
-                      <label class="form-label" for="form3Example1c" style="color:green;">Select File</label><label class="form-label" for="form3Example1c"  style="color:red;">* Upload execl file &#160  &#160  &#160</label>
-                    <input type="file" name="myfile" required accept="letterSerialno_Format.xlsx" class="form-control w-75">     
-                    </div>
-                    <div class="form-outline flex-fill w-25" align="center">
-                      <input class="btn bg-danger rounded rounded-4 mb-1" style="color:white; font-size:15px;" type="submit" value="Upload">
-                      <a  style="color:green; font-size:15px; margin:20px;" href = "{% static 'sample_format_excel/letterSerialno_Format.xlsx' %}" download = "file_name">Sample<i class="fa fa-download" aria-hidden="true"></i> </a>
-                  </div>
-                    </form>
                   
 {% else %}
 <h1> You Do Not Have permission to access this page</h1>

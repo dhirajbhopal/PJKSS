@@ -26,6 +26,8 @@ input
 }
 
 </style>
+ <a href="searchserialno"class="btn btn-outline-danger m-3"  style="color:black; font-size:15px;">Back</a>
+<div class="container-fluid">
 <div style="overflow-x:auto;">
 <table id="showmarks" class="table-bordered container-fluid" align="center">
        <tr id="td1" border="1px" align="center" style="background-color:black; color:white;">
@@ -40,9 +42,9 @@ input
                       <tr id="td1" border="2" align="center">
                         <form action="editserialno" method="POST">
                           {% csrf_token %}
-                          <input type="hidden" name="serialno" value="{{i.serialno}}">
-                        <td><input type="text" disabled name="serialno" value="{{i.serialno}}"></td>
-                        <td><input type="text" disabled name="issuername" value="{{i.issuername}}"></td>
+                          <input type="hidden" name="serialno" value="{{i.code}}">
+                        <td><input type="text" disabled name="serialno" value="{{i.code}}"></td>
+                        <td><input type="text" name="issuername" value="{{i.issuername}}"></td>
                         <td><input type="text" name="issuedto" value="{{i.issuedto}}"></td>
                         <td><input type="text" name="subject" value="{{i.subject}}"></td>
                         <td><input type="date" name="issuedate" value="{{i.issuedate|date:'Y-m-d'}}"></td>
@@ -52,6 +54,7 @@ input
                     {% endfor %}  
                     </table>    
                         </div> 
+                      </div>
                         {% else %}
 <h1> You Do Not Have permission to access this page</h1>
 {% endif %}

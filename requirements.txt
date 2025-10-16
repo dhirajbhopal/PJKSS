@@ -37,5 +37,5 @@ install --upgrade requests
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
  brew install openssl
 
- https://github.com/dhirajbhopal/PJKSS.git
+ git clone https://github.com/dhirajbhopal/PJKSS.git
 

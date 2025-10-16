@@ -63,15 +63,15 @@ class User(AbstractUser):
 
 
 
-class letterserialno(models.Model):
-    serialno=models.CharField(max_length=50,unique=True)
+class UniqueCode(models.Model): #serianno code for letterpad
+    code=models.CharField(max_length=10,unique=True)
     issuername=models.CharField(max_length=50,blank=True,null=True)
     issuedto=models.CharField(max_length=80,blank=True,null=True)
     subject=models.CharField(max_length=30,blank=True,null=True)
     issuedate=models.DateField(blank=True, null=True)
 
     def __str__(self):
-        return self.serialno
+        return self.code
 
 
 # date and time

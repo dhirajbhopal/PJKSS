@@ -6,15 +6,6 @@
 {% if request.user.is_authenticated %}
 {% if user.role == "Admin" %}
 <script type="text/javascript" src="{% static 'jquery.js' %}"></script>
-<div class="container-fluid">
-  <form action='searchserialno' method="POST" name="f1" onsubmit="return validation();">
-      {% csrf_token %}
-  <span style="margin:20px;"> Serial No </span> <input type="text" name="serialno" style="margin:10px;">
-<button  class="btn btn-info btn-outline-danger" style="color:black; font-size:15px;">Search</button>
-<a href="searchserialnoall"class="btn btn-outline-danger m-3"  style="color:black; font-size:15px;">View All</a>
-</form>
-
-
 <style>
 .showmarks {
   border-collapse: collapse;
@@ -40,8 +31,8 @@
         }
 
 </style>
-{% for i in serial %}
-
+ <a href="searchserialno"class="btn btn-outline-danger m-3"  style="color:black; font-size:15px;">Back</a>
+<div class="container-fluid">
 <table class="showmarks" id="myTable" class="table-bordered container-fluid" align="center">
       <tr class="td1" border="1px" align="center" style="background-color:black; color:white;"> 
                       <th>Serial No</th>
@@ -51,6 +42,7 @@
                       <th>Date</th>
                       <th>Update</th>
                     </tr>
+                    {% for i in serialall %}
                       <tr class="td1" border="2" align="center">
                       <td>{{i.code}}</td>
                       <td>{{i.issuername}}</td>  
@@ -65,6 +57,7 @@
                       </tr>
                      {% endfor %}
                     </table> 
+                  </div>
 
 <script type="text/javascript">
 function validation() 
@@ -85,7 +78,7 @@ function validation()
         <span style="color: red; margin-left: 20px;"><i class="fa fa-exclamation-triangle" aria-hidden="true" style='font-size:30px;color:red;margin-top: 10px;"'></i>{{message}}</span>
     {% endfor %}
 {% endif %}
-</div>
+
                   
 {% else %}
 <h1> You Do Not Have permission to access this page</h1>

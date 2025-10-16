@@ -1,5 +1,5 @@
 from django.urls import path
-from core.views import ProfileView,Imageview,ProfileUpdate,mysingup,signuptask,forgotpassword,letterno,addserialno,searchserialno,editserialno, gallery1, gallery2,donationlist,donationdetail
+from core.views import ProfileView,Imageview,ProfileUpdate,mysingup,signuptask,forgotpassword,addserialno,searchserialno,editserialno, gallery1, gallery2,donationlist,donationdetail
 from django.contrib.auth import views as auth_views
 from django.contrib.auth import views
 from core import urls as core_urls
@@ -22,7 +22,6 @@ urlpatterns = [
     path('imageview',Imageview.as_view(), name='imageview'),
     path('profileupdate/<int:pk>', ProfileUpdate.as_view(),name='profileupdate'),
     path('addserialno', views.addserialno),
-    path('letterno', views.letterno),
     path('searchserialno', views.searchserialno),
     path('editserialno', views.editserialno),
     path('gallery1', views.gallery1),
@@ -30,6 +29,8 @@ urlpatterns = [
     path('donationdetail', views.donationdetail),
     path('donationlist', views.donationlist),
     path('logout', views.logoutUser, name="logout"),
+    path('generate_unique_code', views.generate_unique_code, name="generate_unique_code"),
+    path('searchserialnoall', views.searchserialnoall),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

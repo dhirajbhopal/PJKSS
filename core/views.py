@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from django.urls import reverse
 from django.views import View
-from core.models import User,letterserialno,donation
+from core.models import User,UniqueCode,donation
 from django.conf import settings
 from django.contrib import messages
 from django.db.utils import IntegrityError
@@ -21,8 +21,6 @@ from random import randint
 import openpyxl
 import pandas as pd
 from django.conf import settings 
-#from rest_framework import generics
-#from import_export import resources
 from django.core.files.storage import FileSystemStorage
 from num2words import num2words
 from django.contrib.auth.decorators import login_required
@@ -54,6 +52,10 @@ import requests
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.db.models import Sum
+from django.http import JsonResponse
+from .models import UniqueCode
+import random
+import string
 
 
 class ProfileView(View):
@@ -310,47 +312,47 @@ def logoutUser(request):
     logout(request)
     return redirect('login')
 
+@login_required
+def generate_unique_code(request):
+    defaults="PJKSS"
+    def create_code():
+        # Generates a random 10-character string with letters + digits
+        return ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
+    code = defaults+create_code()
+    while UniqueCode.objects.filter(code=code).exists():
+        code = create_code()
+    UniqueCode.objects.create(code=code)
+    messages.success(request,f'Generted Serial No is:- {code}')
+    #return JsonResponse({'unique_code': code})
+    #return redirect('/addserialno', {}'unique_code': code})
+    return redirect('/addserialno')
 
 
+@login_required
 def addserialno(req):
     return render(req,'adminrole/addserialno.html')
 
+
 @login_required
-def letterno(request):
-    try:
-        if request.method == 'POST' and request.FILES['myfile']:      
-            myfile = request. FILES['myfile']
-            fs = FileSystemStorage()
-            filename = fs.save(myfile.name, myfile)
-            uploaded_file_url = fs.url(filename)              
-            empexceldata = pd.read_excel(filename)        
-            dbframe = empexceldata
-            for dbframe in dbframe.itertuples():
-                obj = letterserialno.objects.create(serialno=dbframe.serialno,issuername=dbframe.issuername,issuedto=dbframe.issuedto,
-                    subject=dbframe.subject,issuedate=dbframe.issuedate)           
-                obj.save()
-                messages.success(request,'Data Uploded Successfully')
-        return HttpResponseRedirect('/addserialno')
-    except IntegrityError as ex:
-        messages.success(request,'Serial No Already Exist')
-        return redirect('/addserialno')
-    except Exception as ex:
-        messages.success(request,'Header mismatch in exel sheet')       
-        return redirect('/addserialno')
-
-
-
 def searchserialno(req):
-    serialno=req.POST.get("serialno")
-    serial=letterserialno.objects.filter(serialno=serialno)
+    code=req.POST.get("serialno")
+    serial=UniqueCode.objects.filter(code=code)
     for i in serial:
-        if( i.serialno!=serialno):
-            messages.success(req,"Serial No. Not Found")   
+        if (i.code!=code):
+            messages.success(req,"Serial No. Not Found")
+            return render(req,'adminrole/searchserialno.html')   
         else:
-            serial=letterserialno.objects.filter(serialno=serialno)
-            return render(req,'adminrole/searchserialno.html',{'serial':serial})   
-    messages.success(req,"Serial No. Not Found")  
+            serial=UniqueCode.objects.filter(code=code)
+            return render(req,'adminrole/searchserialno.html',{'serial':serial})    
     return render(req,'adminrole/searchserialno.html')
+
+
+@login_required
+def searchserialnoall(req):
+    serialall=UniqueCode.objects.all()
+    return render(req,'adminrole/searchserialnoall.html',{'serialall':serialall})    
+
+
 
 
 
@@ -358,19 +360,20 @@ def searchserialno(req):
 @login_required
 def editserialno(req):
     if req.method=="GET":
-        serialno=req.GET.get("serialno")
-        serialdata=letterserialno.objects.get(serialno=serialno)
-        serialdata=letterserialno.objects.filter(serialno=serialno)
+        code=req.GET.get("serialno")
+        serialdata=UniqueCode.objects.get(code=code)
+        serialdata=UniqueCode.objects.filter(code=code)
         return render(req,'adminrole/editserialno.html',{'serialdata':serialdata})
     else:
-        serialno=req.POST.get("serialno")
-        modstu3=letterserialno.objects.get(serialno=serialno)
+        code=req.POST.get("serialno")
+        modstu3=UniqueCode.objects.get(code=code)
         modstu3.issuedto=req.POST.get("issuedto")
         modstu3.subject=req.POST.get("subject")
         modstu3.issuedate=req.POST.get("issuedate")
+        modstu3.issuername=req.POST.get("issuername")
         modstu3.save()
-        messages.success(req,"Letter Serial No.  Data Updated ") 
-        return render(req,'adminrole/addserialno.html')
+        messages.success(req,"Serial No Updated ") 
+        return redirect('/searchserialno')
 
 
 def gallery1(req):
@@ -408,4 +411,7 @@ def donationlist(req):
     donationdetails=donation.objects.all()
     total_amount = donationdetails.aggregate(total=Sum('Amount'))['total']
     return render(req,'member/donationlist.html',{'donationdetails':donationdetails, 'total_amount' :total_amount})
+
+
+
 
