@@ -1,7 +1,7 @@
 from django.contrib import admin
 #from student.models import student
 #from faculty.models import faculty
-from core.models import User,UniqueCode, donation
+from core.models import User,UniqueCode, donation,UserLoginInfo
 from django.contrib.auth.admin import UserAdmin as DefaultUserAdmin
 
 # Register your models here.
@@ -56,9 +56,12 @@ class UniqueCodeAdmin(admin.ModelAdmin):
 
 
 @admin.register(donation)
-class registerAdmin(admin.ModelAdmin):
+class donationAdmin(admin.ModelAdmin):
     list_display=['name','lastname','address','Amount']
 
 
+@admin.register(UserLoginInfo)
+class registerAdmin(admin.ModelAdmin):
+    list_display=['ip_address','login_time','city','region','country','browser','os','device', 'user']
 
 
