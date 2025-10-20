@@ -114,7 +114,7 @@ class UserLoginInfo(models.Model):
     login_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.user.user} - {self.ip_address}"
+        return f"{self.user.username} - {self.ip_address}"
 
 
 

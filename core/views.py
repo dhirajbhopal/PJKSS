@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from django.urls import reverse
 from django.views import View
-from core.models import User,UniqueCode,donation
+from core.models import User,UniqueCode,donation,UserLoginInfo
 from .models import UserLoginInfo
 from django.conf import settings
 from django.contrib import messages
