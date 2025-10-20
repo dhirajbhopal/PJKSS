@@ -8,6 +8,7 @@ from django.contrib import auth
 from django.urls import reverse
 from django.views import View
 from core.models import User,UniqueCode,donation
+from .models import UserLoginInfo
 from django.conf import settings
 from django.contrib import messages
 from django.db.utils import IntegrityError
@@ -56,6 +57,12 @@ from django.http import JsonResponse
 from .models import UniqueCode
 import random
 import string
+
+# user loaction
+from django.contrib.auth.signals import user_logged_in
+from django.dispatch import receiver
+from .models import UserLoginInfo
+from .utils import get_client_ip, get_geo_info, get_device_info
 
 
 class ProfileView(View):
@@ -417,5 +424,24 @@ def donationlist(req):
     return render(req,'member/donationlist.html',{'donationdetails':donationdetails, 'total_amount' :total_amount})
 
 
+# user loaction
+@receiver(user_logged_in)
+def log_user_login(sender, request, user, **kwargs):
+    ip = get_client_ip(request)
+    geo = get_geo_info(ip)
+    device = get_device_info(request)
 
+    UserLoginInfo.objects.create(
+        user=user,
+        ip_address=ip,
+        city=geo.get('city'),
+        region=geo.get('region'),
+        country=geo.get('country'),
+        browser=device.get('browser'),
+        os=device.get('os'),
+        device=device.get('device')
+    )
 
+def login_history(request):
+    data = UserLoginInfo.objects.filter(user=request.user).order_by('-login_time')
+    return render(request, 'tracker/login_history.html', {'data': data})
