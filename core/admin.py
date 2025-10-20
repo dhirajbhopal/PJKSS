@@ -61,7 +61,7 @@ class donationAdmin(admin.ModelAdmin):
 
 
 @admin.register(UserLoginInfo)
-class registerAdmin(admin.ModelAdmin):
+class UserLoginInfoAdmin(admin.ModelAdmin):
     list_display=['ip_address','login_time','city','region','country','browser','os','device', 'user']
 
 
