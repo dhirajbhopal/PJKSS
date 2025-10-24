@@ -350,7 +350,8 @@ def searchserialno(req):
             return render(req,'adminrole/searchserialno.html')   
         else:
             serial=UniqueCode.objects.filter(code=code)
-            return render(req,'adminrole/searchserialno.html',{'serial':serial})    
+            return render(req,'adminrole/searchserialno.html',{'serial':serial})   
+    messages.success(req,"Serial No. Not Found")  
     return render(req,'adminrole/searchserialno.html')
 
 
@@ -445,3 +446,23 @@ def log_user_login(sender, request, user, **kwargs):
 def login_history(request):
     data = UserLoginInfo.objects.filter(user=request.user).order_by('-login_time')
     return render(request, 'tracker/login_history.html', {'data': data})
+
+
+
+def publicsearch(req):
+    return render(req,'site/publicserialno.html')
+
+def publicsearchno(req):
+    code=req.POST.get("serialno")
+    serial=UniqueCode.objects.filter(code=code)
+    for i in serial:
+        if (i.code!=code):
+            messages.success(req,"Serial No. Not Found")
+            return render(req,'adminrole/searchserialno.html')   
+        else:
+            serial=UniqueCode.objects.filter(code=code)
+            return render(req,'site/publicserialno.html',{'serial':serial})   
+    messages.success(req,"Serial No. Not Found") 
+    return render(req,'site/publicserialno.html')
+
+

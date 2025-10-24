@@ -3,16 +3,13 @@
 {% block title %}Search Serial No{% endblock title %}
 {% block forgot %}  {% endblock %}
 {% block content %} 
-{% if request.user.is_authenticated %}
-{% if user.role == "Admin" %}
 <script type="text/javascript" src="{% static 'jquery.js' %}"></script>
 <div class="container-fluid">
   <button class="btn btn-outline-danger m-3" onclick="history.back()">Go Back</button>
-  <form action='searchserialno' method="POST" name="f1" onsubmit="return validation();">
+  <form action='publicsearchno' method="POST" name="f1" onsubmit="return validation();">
       {% csrf_token %}
   <span style="margin:20px;"> Serial No </span> <input type="text" name="serialno" style="margin:10px;">
 <button  class="btn btn-info btn-outline-danger" style="color:black; font-size:15px;">Search</button>
-<a href="searchserialnoall"class="btn btn-outline-danger m-3"  style="color:black; font-size:15px;">View All</a>
 </form>
 
 
@@ -49,7 +46,6 @@
                       <th class="td1">Issue To</th>
                       <th class="td1">Subject</th>
                       <th class="td1">Date</th>
-                      <th class="td1">Action</th>
                     </tr>
                       <tr class="td1" align="center">
                       <td class="td1"><input type="text" style="background-color:transparent; border:none; " id="barcodeInput" disabled value={{i.code}}></td>
@@ -57,16 +53,7 @@
                        <td class="td1">{{i.issuedto}}</td>
                         <td class="td1">{{i.subject}}</td>
                         <td class="td1">{{i.issuedate}}</td>
-                      <td> <form action="editserialno" method="GET">
-                          {% csrf_token %}
-                          <input type="hidden" name="serialno" value="{{i.code}}">
-                    <button class="btn btn-success btn-outline-warning ">Edit</button>
-                   </form></td>
                       </tr> 
-                    </table> 
-                    <div id="printableArea"><svg id="barcode"></svg></div>
-                    <button class="btn btn-success btn-outline-warning m-2" onclick="printDiv('printableArea')">Print</button>
-                    <button class="btn btn-success btn-outline-warning m-2" onclick="generateBarcode()">Bar Code</button>
                    {% endfor %}
                     
 
@@ -125,11 +112,5 @@ function printDiv(divId) {
 {% endif %}
 </div>
                   
-{% else %}
-<h1> You Do Not Have permission to access this page</h1>
-{% endif %}
- {% else %}
- <h1> You are not logged in</h1>
-    {% endif %} 
-               {% endblock %}
-               {% block mainbody %} {% endblock %}
+{% endblock %}
+{% block mainbody %} {% endblock %}
