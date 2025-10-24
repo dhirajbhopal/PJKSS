@@ -32,6 +32,7 @@
 <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
 <!--<meta http-equiv="refresh" content="180">-->
+
 <style>
   <div style="overflow-x:auto;">
 body {
@@ -372,23 +373,19 @@ function myFunction() {
   <div class="row gy-5">
     <div class="col-6 p-2">
       <div class="p-1 rounded-2 text-center">
-        <h2 style="color: red;"> <i style="color:darkred;" class="fa fa-bullhorn" aria-hidden="true"></i> News & Committee Updates </h2>
+        <h2 style="color: red;"> <i style="color:darkred;" class="fa fa-bullhorn" aria-hidden="true"></i> News & Committee Updates 
+        <a class="rounded rounded-3 badge-danger" style="color:green; font-size:15px;" href="{% url 'newsupdate' %}">
+      show</a> </h2>
          <hr>
         <marquee direction="up" scrollamount="3" onmouseover="this.stop();"onmouseout="this.start();">
-         <ol>
-
-          <li style="color:black; font-size: 20px;">नमस्कार, आज {% now "jS F Y  P l" %} है, हमलोगों का लक्ष्य है 31 अक्टूबर 2025 को पटेल जी का मूर्ति स्थापित करना। इसी लिए आप लोगों के आग्रह है कि सहयोग राशि जल्द से जल्द देने का कष्ट करे। ताकि  हमलोगों का लक्ष्य पूरा हो सके।
-यही समय है कुर्मी एकता का ताकत दिखाये। जितना जल्द हम लोग लक्ष्य को पूरा करेंगे उतना ही ज्यादा हमारे डेहरी ,सासाराम , औरंगाबाद एवं पूरे बिहार में पटेल  समाज का नाम रौशन होगा। यह मूर्ति भारत के सबसे ऊंचा दूसरे स्थान पर है। हम लोग एक इतिहास रचने जा रहे है।</li> <br> <br>
-            <li style="color:black; font-size: 20px;">15 अगस्त 2025 को सुबह 10:30 बजे पटेल स्मारक डेहरी में धूम धाम से तिरंगा झंडा फहराया जाएगा, आप सभी से निवेदन है कि समय पे आकर आजादी का पर्व धूम धाम से मनाएं l </li>
-
-            <!--<li style="color:green; font-size: 20px;">3rd Semester Result will decler on 06-Oct-22 at 11:30PM </li>
-            <li style="color:green; font-size: 20px;">5th Semester Result will decler on 07-Oct-22 at 11:30AM</li>
-            <li style="color:green; font-size: 20px;">7th Semester Result will decler on 08-Oct-22 at 11:30AM</li>
-            <li style="color:red; font-size: 20px;"> New Addimission is Going On</li>
-            <li style="color:red; font-size: 20px;">Schollership form last date is 10-Dec-22</li>
-            <li style="color:green; font-size: 20px;">New Addimission is Going On</li>
-          -->
-    </ol>
+          {% for i in dataupdate %}
+         
+          <li style="color:black; font-size: 20px;">
+           <span style="color:red; font-size: 25px"> * </span>{{i.topic}}
+          </li> 
+          <br>
+    
+    {% endfor %}
   </marquee>
 
 <div class="container-fluid">

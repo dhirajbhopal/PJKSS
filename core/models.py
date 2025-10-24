@@ -117,5 +117,9 @@ class UserLoginInfo(models.Model):
         return f"{self.user.username} - {self.ip_address}"
 
 
+class updates(models.Model):
+    topic=models.CharField(max_length=5000)
+    date=models.DateField(blank=True, null=True)
 
-
+    def __str__(self):
+        return self.topic

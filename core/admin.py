@@ -1,7 +1,7 @@
 from django.contrib import admin
 #from student.models import student
 #from faculty.models import faculty
-from core.models import User,UniqueCode, donation,UserLoginInfo
+from core.models import User,UniqueCode, donation,UserLoginInfo,updates
 from django.contrib.auth.admin import UserAdmin as DefaultUserAdmin
 from django.utils.html import format_html
 
@@ -12,42 +12,6 @@ class facultyAdmin(admin.ModelAdmin):
 	list_display=['id','name'  ,  'email',  'mobileno'  ,  'subject'  ,  'image']"""
 
 
-
-
-"""@admin.register(User)
-class UserAdmin(admin.ModelAdmin):
-    fieldsets = (
-        (None,{"fields": ("username","email","password")}),
-        (("Personal info"), {"fields": ("first_name", "last_name","role","image", "address")}),
-        (
-            ("Permissions"),
-            {
-                "fields": (
-                    "is_active",
-                    "is_staff",
-                    "is_superuser",
-                    "groups",
-                    "user_permissions",
-                ),
-            },
-        ),
-        (("Important dates"), {"fields": ("last_login", "date_joined")}),
-    )
-    add_fieldsets = (
-        (
-            None,
-            {
-                "classes": ("wide",),
-                "fields": ("email", "password1", "password2"),
-            },
-        ),
-    )
-    list_display = ("email", "is_active", "is_staff", "is_superuser")
-    list_filter = ("is_active", "is_staff", "is_superuser")
-    search_fields = ("email",)
-    ordering = ("email",)
-    filter_horizontal = ("groups", "user_permissions",)
-    readonly_fields = ('password','email','username')"""
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
@@ -109,5 +73,10 @@ class donationAdmin(admin.ModelAdmin):
 @admin.register(UserLoginInfo)
 class UserLoginInfoAdmin(admin.ModelAdmin):
     list_display=['ip_address','login_time','city','region','country','browser','os','device', 'user']
+
+
+@admin.register(updates)
+class updatesAdmin(admin.ModelAdmin):
+    list_display=['topic','date']
 
 

@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from django.urls import reverse
 from django.views import View
-from core.models import User,UniqueCode,donation,UserLoginInfo
+from core.models import User,UniqueCode,donation,UserLoginInfo,updates
 from .models import UserLoginInfo
 from django.conf import settings
 from django.contrib import messages
@@ -466,3 +466,19 @@ def publicsearchno(req):
     return render(req,'site/publicserialno.html')
 
 
+def adminupdated(request):
+    try:
+        topicdata=topic()
+        topicdata.topic=request.GET.get("topic")
+        topicdata.date=request.GET.get("date")
+        topicdata.save()
+        messages.success(request,'Topic Updated Successfully')
+        return redirect('/')
+    except IntegrityError as ex:
+        messages.success(request,'Fill data is not correct')
+        return redirect('/')
+
+class newsupdate(View):
+    def get(self,request):
+        dataupdate=updates.objects.all().order_by('-id')
+        return render(request,'base.html',{'dataupdate':dataupdate})
