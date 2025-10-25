@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Update Serial No{% endblock title %}
+{% block title %}Add Serial No{% endblock title %}
 {% block forgot %}  {% endblock %}
 {% block content %} 
 {% if request.user.is_authenticated %}
@@ -22,7 +22,7 @@
 <script type="text/javascript">
   $(document).ready(function(){
      $("#dflex").click(function(){
-     var proceed = confirm("Do you want to Generate Serian No");
+     var proceed = confirm("Do you want to Generate Serial No");
 
     if (proceed) 
     {     return true;

@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
   <title> {% block title %} PATEL JAN KALYAN SEVA SAMITI {% endblock %}</title>
   <link rel="icon" href="{% static 'images/PATEL_LOGO.png' %}" type="image/icon type">
    <script type="text/javascript" src="{% static 'jquery.js' %}"></script>
@@ -32,6 +33,18 @@
 <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
 <!--<meta http-equiv="refresh" content="180">-->
+
+<script>
+    window.addEventListener('load', function() {
+      // Check if auto-click has already happened in this session
+      if (!sessionStorage.getItem('autoClicked')) {
+        setTimeout(function() {
+          document.getElementById("myLink").click(); // 👈 auto-clicks link
+          sessionStorage.setItem('autoClicked', 'true'); // prevent future auto-clicks
+        }, 3000); // wait 3 seconds
+      }
+    });
+  </script>
 
 <style>
   <div style="overflow-x:auto;">
@@ -112,9 +125,9 @@ table, th, td {
 </style>
 
 </head>
-  <body>
-  <!--- background="{% static 'images/bg.jpg' %}"
-  style="background-repeat:repeat;background-size:cover;"> -->
+  <body style="background-color:#ffffe6">
+  <!--background="{% static 'images/site_bg.png' %}"
+  style="background-repeat:repeat;background-size:cover;">-->
  <style>
 /* Responsive header container */
 .header-container {
@@ -236,14 +249,14 @@ table, th, td {
 </style>
 
 <style>
-            hr {
-                border: 1px solid red;
-                height: 5px;
-                background-color: red;
-                width: 100%;
-                margin: 20px auto;
-            }
-        </style>
+ hr {
+ border: 1px solid red;
+ height: 5px;
+ background-color: red;
+ width: 100%;
+ margin: 20px auto;
+}
+</style>
 
 <div class="d-flex" style="background-color: #f6f7c1;">
   <div class="p-2 flex-fill" >
@@ -262,91 +275,77 @@ table, th, td {
   </marquee>
 </div>
 
+<!---Start menu---->
 
-<div class="topnav container-fluid w-100 p-0 m-0" id="myTopnav">
-  <a href="/" class="active"><i class="fa fa-home faicon" aria-hidden="true"></i> Home</a>
-  <a href="{% url 'contact' %}"><i class="fa fa-phone faicon" aria-hidden="true"></i> Contact Us</a>
-  <a href="{% url 'vision' %}"><i class="fa fa-book" aria-hidden="true"></i> Vision</a>
-  <a href="{% url 'about' %}"><i class="fa fa-info-circle faicon" aria-hidden="true"></i>About</a>
-  <a href="donation" style="color:red">Donate</a>
-  <a href="publicsearch" style="color:green">Serial No</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-size:15px ;padding-left: 10px;">
+  <a href="/" class="active navbar-brand" style="font-size:13px;"><i class="fa fa-home faicon" aria-hidden="true"></i> Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-  <!-------Start Authetication User Login---->
-  {% if request.user.is_authenticated %}
-     <span style="float: right; color:red; padding-top: 15px;  padding-right: 20px;" > <img src="{{user.image.url}}" style="border-radius:10px;" height="25px"> </span>
-     <span style="float: right; color: white; padding-top: 15px;"> {{user.first_name}} {{user.last_name}} Role: {{user.role}}&#160 </span>
-    <span style="float: right; color: red; padding-top: 15px;" type="button"data-bs-toggle="dropdown" aria-expanded="false">Menu &#160</span><br>
-     <ul class="dropdown-menu border-0 text-center rounded rounded-3 m-0 p-0" style="background-color: rgba(254, 185, 185,0.93);">
-      <table class="m-0 p-0">
-    <tr>
-    <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:15px;" href="{% url 'logout' %}">
-      Logout</a></td>
-    </tr>
-      <tr>
-    <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:15px;" href="{% url 'change_password' %}">
-      Change Password</a></td></tr>
-  </tr>
-  <tr>
-    <td><a href="{% url 'profile' %}" class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:15px;">
-      Update Profile</a></a></td>
-    </tr>
-     <tr>
-    <td ><a href="{% url 'imageview' %}" class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:15px;">
-    Update Image</a></td>
-    </tr>
-    <tr>
-      <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:15px;" href="donationlist">Show Donation List</a></td>
-    </tr>
+  <div class="collapse navbar-collapse m-0 p-0" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+         <a class="navbar-brand" style="font-size:15px;" href="{% url 'contact' %}"><i class="fa fa-phone faicon" aria-hidden="true"></i> Contact Us</a>
+      </li>
+      <li class="nav-item">
+       <a class="navbar-brand" style="font-size:15px" href="{% url 'vision' %}"><i class="fa fa-book" aria-hidden="true"></i> Vision</a></li>
+      <li class="nav-item">
+       <a class="navbar-brand" style="font-size:15px" href="{% url 'about' %}"><i class="fa fa-info-circle faicon" aria-hidden="true"></i> About Us</a></li>
+      {% if request.user.is_authenticated %}
+        <!-------Start Authetication User Login---->
+     
+     <li class="nav-item">
+      <a  class="navbar-brand"style="color: green; padding-top: 15px; font-size:13px;"> {{user.first_name}} {{user.last_name}}</a> </li>
+        <li class="nav-item">
+      <a  class="navbar-brand"style="color: green; padding-top: 15px; font-size:13px;"> <span style="color:red">Role: {{user.role}}</a> </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle navbar-brand" style="color:red; padding-top:15px;font-size:15px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Menu
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="padding-left:10px">
+          <a href="{% url 'logout' %}" class="dropdown-item"  style="color:black; font-size:13px;">Logout</a>
+          <a href="{% url 'change_password' %}" class="dropdown-item " style="color:black; font-size:13px;" >Change Password</a>
+    <a href="{% url 'profile' %}" class="dropdown-item " style="color:black; font-size:13px;">Update Profile</a></a>
+    <a href="{% url 'imageview' %}" class="dropdown-item " style="color:black; font-size:13px;">Update Image</a>
+    <a href="donationlist" class="dropdown-item " style="color:black; font-size:13px;" >Show Donation List</a>
+    <!------- Start Admin Login---->
+         {% if user.role == "Admin" %}
 
-       <!------- Start Admin Login---->
- {% if user.role == "Admin" %}
-      <tr>
-      <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:black; font-size:15px;" href="addserialno">
-      Letter Serial No</a></td>
-  </tr>
-  <tr>
-      <td><a class="dropdown-item rounded rounded-3 badge-danger" style="color:red; font-size:15px;" href="https://pjkss.pythonanywhere.com/pateladmin" target="_blank">Admin Console</a></td>
-    </tr>
-  {% endif %}
-      <!-------End Admin Login---->
-
-       <!------- Start Faculty Login---->
+        <a href="addserialno" class="dropdown-item " style="color:black; font-size:13px;" >Letter Serial No</a>
+        <a href="https://pjkss.pythonanywhere.com/pateladmin" class="dropdown-item" style="color:red; font-size:13px;" target="_blank">Admin Console</a>
+    {% endif %}
+    <!------- End Admin Login---->
+     
+    <!------ Start Member Login---->
 
       {% if user.role == "Member" %}
- <tr>
-    <td></a></td>
-    <td></td>
-   </tr>
+   
+    
       {% endif %}
-      <!------- End Faculty Login---->
-       </table>
+       <!------ End Member Login---->
+        </div>
+      </li>
+       <!------ End of authenticated---->
+       <li class="navbar-brand" style="float: right; color:red; padding-top: 1px" > 
+      <img src="{{user.image.url}}" height="50px"  align="right" class="rounded rounded-3"> </li>
        {% else %}
-    <a href="{% url 'signup' %}"> <i class="fa fa-plus" style="color:red"></i> Signup</a></span>
-    <a href="{% url 'login' %}"><i style="color:red" class="fa fa-sign-in" aria-hidden="true"></i> Member Login</a></span>
-    <span style="color: red; margin-left: 20px;"> {{msg}} </span>
-  </a>
+
+    <li class="nav-item">
+    <a  class="navbar-brand" style="font-size:15px" href="{% url 'signup' %}"> <i class="fa fa-plus" style="color:red"></i> Signup</a></li>
+    <li class="nav-item">
+    <a class="navbar-brand" style="font-size:15px" href="{% url 'login' %}"><i style="color:red" class="fa fa-sign-in" aria-hidden="true"></i> Member Login</a></li>
+    <li class="nav-item">
+    </ul>
+    <span style="color: red; margin-left: 20px;"> {{msg}} </li>
     {% endif %}
-     <!-------End of all Login---->
-  {% endblock %}
+    </ul> 
+  </div>
+</nav>
 
-<a href="javascript:void(0);" class="icon" onclick="myFunction()">
-    <i class="fa fa-bars"> Option</i>
-  </a>
+<!------ End of Menu---->
 
-<script>
-function myFunction() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
-</script>
-</div>
-<!------header Part ----->
-    <!---------End of Header Part----->
-
+{% endblock %}
 {% block about %} {% endblock %}
 {% block vision %} {% endblock %}
 {% block contact %} {% endblock %}
@@ -374,10 +373,9 @@ function myFunction() {
     <div class="col-6 p-2">
       <div class="p-1 rounded-2 text-center">
         <h2 style="color: red;"> <i style="color:darkred;" class="fa fa-bullhorn" aria-hidden="true"></i> News & Committee Updates 
-        <a class="rounded rounded-3 badge-danger" style="color:green; font-size:15px;" href="{% url 'newsupdate' %}">
-      show</a> </h2>
+        <a id="myLink" style="color:green; font-size:15px;" href="{% url 'newsupdate' %}">show</a></h2>
          <hr>
-        <marquee direction="up" scrollamount="3" onmouseover="this.stop();"onmouseout="this.start();">
+        <marquee behavior="scroll" direction="up" scrollamount="2"  height="150" onmouseover="this.stop();"onmouseout="this.start();">
           {% for i in dataupdate %}
          
           <li style="color:black; font-size: 20px;">
