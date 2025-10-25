@@ -1,5 +1,5 @@
 from django.urls import path
-from core.views import ProfileView,Imageview,ProfileUpdate,mysingup,signuptask,forgotpassword,newsupdate
+from core.views import ProfileView,Imageview,ProfileUpdate,mysingup,signuptask,forgotpassword,home
 from django.contrib.auth import views as auth_views
 from django.contrib.auth import views
 from core import urls as core_urls
@@ -33,7 +33,7 @@ urlpatterns = [
     path('searchserialnoall', views.searchserialnoall),
     path('publicsearch', views.publicsearch),
     path('publicsearchno', views.publicsearchno),
-    path('newsupdate', views.newsupdate.as_view(), name='newsupdate'),
+    path('', views.home.as_view(), name='home'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

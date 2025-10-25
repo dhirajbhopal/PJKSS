@@ -32,19 +32,6 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
-<!--<meta http-equiv="refresh" content="180">-->
-
-<script>
-    window.addEventListener('load', function() {
-      // Check if auto-click has already happened in this session
-      if (!sessionStorage.getItem('autoClicked')) {
-        setTimeout(function() {
-          document.getElementById("myLink").click(); // 👈 auto-clicks link
-          sessionStorage.setItem('autoClicked', 'true'); // prevent future auto-clicks
-        }, 3000); // wait 3 seconds
-      }
-    });
-  </script>
 
 <style>
   <div style="overflow-x:auto;">
@@ -275,9 +262,9 @@ table, th, td {
   </marquee>
 </div>
 
-<!---Start menu---->
+<!---Start menu--toggler--expand-lg-->
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-size:15px ;padding-left: 10px;">
+<nav class="navbar navbar-expand-md navbar-light bg-light" style="font-size:15px ;padding-left: 10px;">
   <a href="/" class="active navbar-brand" style="font-size:13px;"><i class="fa fa-home faicon" aria-hidden="true"></i> Home</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -373,7 +360,6 @@ table, th, td {
     <div class="col-6 p-2">
       <div class="p-1 rounded-2 text-center">
         <h2 style="color: red;"> <i style="color:darkred;" class="fa fa-bullhorn" aria-hidden="true"></i> News & Committee Updates 
-        <a id="myLink" style="color:green; font-size:15px;" href="{% url 'newsupdate' %}">show</a></h2>
          <hr>
         <marquee behavior="scroll" direction="up" scrollamount="2"  height="150" onmouseover="this.stop();"onmouseout="this.start();">
           {% for i in dataupdate %}

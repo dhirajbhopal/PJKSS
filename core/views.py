@@ -478,7 +478,7 @@ def adminupdated(request):
         messages.success(request,'Fill data is not correct')
         return redirect('/')
 
-class newsupdate(View):
+class home(View):
     def get(self,request):
         dataupdate=updates.objects.all().order_by('-id')
         return render(request,'base.html',{'dataupdate':dataupdate})

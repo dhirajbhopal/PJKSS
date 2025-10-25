@@ -20,7 +20,7 @@ urlpatterns = [
     path('logout', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
 
     # Main Page 
-    path('', TemplateView.as_view(template_name='base.html'), name='home'),
+    #path('', TemplateView.as_view(template_name='base.html'), name='home'),
 
     # Change Password
     path('change-password',auth_views.PasswordChangeView.as_view(template_name='commons/change-password.html',success_url = '/'),
