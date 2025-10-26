@@ -11,6 +11,7 @@ from django.core.mail import send_mail, BadHeaderError
 
 
 urlpatterns = [
+    #path('__debug__/', include('debug_toolbar.urls')),
     path('pateladmin', admin.site.urls),
     path('', include('django.contrib.auth.urls')),
     path('', include(core_urls)),

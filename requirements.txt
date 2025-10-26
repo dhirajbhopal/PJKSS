@@ -37,4 +37,7 @@ install --upgrade requests
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
  brew install openssl
 
+
 git clone https://github.com/dhirajbhopal/PJKSS.git
+
+python -m django startproject webrtc_project "command for new gjnago project"
