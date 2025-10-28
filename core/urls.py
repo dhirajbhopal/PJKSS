@@ -8,6 +8,9 @@ from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns # new
+from django.views.static import serve #new
+from django.urls import path, include, re_path #new
 
 urlpatterns = [
     path('signup', mysingup.as_view(), name='signup'),
@@ -34,6 +37,7 @@ urlpatterns = [
     path('publicsearch', views.publicsearch),
     path('publicsearchno', views.publicsearchno),
     path('', views.home.as_view(), name='home'),
+    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
 ]
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

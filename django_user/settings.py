@@ -17,10 +17,6 @@ import ssl
 import requests
 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-
-#Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
@@ -30,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '&#2uf8lms6l!ow)om51gr)70h4*#f$w=!)labd!t36(ua4z6hh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -134,20 +130,36 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-MEDIA_ROOT = BASE_DIR
-MEDIA_URL = '/media/userimage/'
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#MEDIA_ROOT = BASE_DIR
+#MEDIA_URL = '/media/userimage/'
 
+#STATIC_URL = '/static/'
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 #new------------------
-STATIC_URL ='/static/admin/css/base.css/'   
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+#STATIC_URL ='/static/admin/css/base.css/'   
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 #new----------------------
+
+STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
+
+if DEBUG:
+
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles')]
+
+else:
+
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
 
 # Page to go after successfull login
 LOGIN_REDIRECT_URL = 'home'
