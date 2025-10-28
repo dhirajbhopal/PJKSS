@@ -288,6 +288,7 @@ function Generate() {
     <div class="container bg-white rounded rounded-5" style="width:500px;"> 
 <body onload="Generate();">
                 <a onclick="history.back()" style="border: none ;width: 1px;margin-left:10px"><img src="{% static 'img/animated-icon-backward_2.gif' %}" height="45px"></a>
+                <a href="/" style="font-size:35px;"><i class="fa fa-home faicon " style="color:green;" aria-hidden="true"></i></a>
                  <a href="" id="refreshButton"><i class="fa fa-spinner faa-spin faa-reverse animated" style="font-size: 2em;color: red; margin-left: 20%;"></i></a>
                 <form name="f1" action="{% url 'signuptask' %}" method="GET" enctype="multipart/form-data" onsubmit="return validation();" class="mx-1 mx-md-4">
                   {% csrf_token %}
