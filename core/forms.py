@@ -1,5 +1,5 @@
 from django import forms
-#from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 from core.models import User
 from django.contrib.auth.forms import UserCreationForm
 import datetime
@@ -44,4 +44,7 @@ class ImgForm(forms.ModelForm):
         fields = [
             'image', 
             ]
-#Password Rest Form
+
+
+
+

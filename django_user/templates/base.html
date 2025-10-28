@@ -1,9 +1,7 @@
 {% include 'mycss.html' %}
-{% block default %}
 {% load static %}
-
 <!----main code start---->
-
+{% block hedder %}
 <div class="d-flex" style="background-color: #f6f7c1;">
   <div class="p-2 flex-fill" >
     <a href="/"><img src="{% static 'images/PATEL_LOGO.png' %}" height="100px" alt="Logo"></a><br>
@@ -20,11 +18,12 @@
     <span style="color:orange;" class="card-text p-0 m-0">Date:- {% now "jS F Y " %} &#160  Day:- {% now "l" %} &#160  Time:- {% now "P " %}    </span >
   </marquee>
 </div>
-
+{% endblock %}
+{% block default %}
 <!---Start menu--toggler--expand-lg- bg-light-->
 
 <nav class="navbar navbar-expand-md navbar-light bg-light" style="font-size:15px ;padding: 5px;">
-  <a href="/" class="active navbar-brand" style="font-size:13px;"><i class="fa fa-home faicon" aria-hidden="true"></i> Home</a>
+  <a href="/" class="active navbar-brand" style="font-size:13px;"><i class="fa fa-home faicon " style="color:green;" aria-hidden="true"></i> Home</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -32,12 +31,12 @@
   <div class="collapse navbar-collapse m-0 p-0" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-         <a class="navbar-brand" style="font-size:15px;" href="{% url 'contact' %}"><i class="fa fa-phone faicon" aria-hidden="true"></i> Contact Us</a>
+         <a class="navbar-brand active" style="font-size:15px;" href="{% url 'contact' %}">Contact Us</a>
       </li>
       <li class="nav-item">
-       <a class="navbar-brand" style="font-size:15px" href="{% url 'vision' %}"><i class="fa fa-book" aria-hidden="true"></i> Vision</a></li>
+       <a class="navbar-brand" style="font-size:15px" href="{% url 'vision' %}">Vision</a></li>
       <li class="nav-item">
-       <a class="navbar-brand" style="font-size:15px" href="{% url 'about' %}"><i class="fa fa-info-circle faicon" aria-hidden="true"></i> About Us</a></li>
+       <a class="navbar-brand" style="font-size:15px" href="{% url 'about' %}">About Us</a></li>
       {% if request.user.is_authenticated %}
         <!-------Start Authetication User Login---->
      
@@ -539,17 +538,7 @@
 </div>
 
 
-
-
-
-
-
-
 <!----  end----->
-
-
-
-
         
 <div class="container-fluid">
   <img src="{% static 'images/hrline.png' %}" width="100%">

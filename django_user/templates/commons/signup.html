@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Sigin{% endblock title %}
+{% block default %}{% endblock %}
 {% block content %} 
  <script type="text/javascript">
     $(document).ready(function(){
@@ -283,17 +284,11 @@ function Generate() {
             var captchaCode = str + chr1;
             document.getElementById("txtCaptcha").value = captchaCode  
         } 
-    </script>  
-<div class="container-fluid">
+    </script> 
+    <div class="container bg-white rounded rounded-5" style="width:500px;"> 
 <body onload="Generate();">
-  <div class="container p-1">
-    <div class="row d-flex justify-content-center align-items-center">
-      <div class="col-lg-12 col-xl-11">
-        <div class="card text-black" style="border-radius: 25px;">
-          <div class="card-body p-md-1">
-            <div class="row justify-content-center">
-              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                
+                <a onclick="history.back()" style="border: none ;width: 1px;margin-left:10px"><img src="{% static 'img/animated-icon-backward_2.gif' %}" height="45px"></a>
+                 <a href="" id="refreshButton"><i class="fa fa-spinner faa-spin faa-reverse animated" style="font-size: 2em;color: red; margin-left: 20%;"></i></a>
                 <form name="f1" action="{% url 'signuptask' %}" method="GET" enctype="multipart/form-data" onsubmit="return validation();" class="mx-1 mx-md-4">
                   {% csrf_token %}
                    <div class="d-flex flex-row align-items-center mb-0">
@@ -311,21 +306,21 @@ function Generate() {
                   <div class="d-flex flex-row align-items-center mb-0">
                     <div class="form-outline flex-fill mb-2">
                       <label class="form-label" for="form3Example1c" style="color:green;">First Name</label><label class="form-label" for="form3Example1c" style="color:red;">*</label>
-                      <input type="text" name="name" class="form-control">
+                      <input type="text" name="name" placeholder="First Name" class="form-control">
                     </div> &#160 &#160
                     <div class="form-outline flex-fill mb-2">
                       <label class="form-label" for="form3Example1c" style="color:green;">Last Name</label><label class="form-label" for="form3Example1c" style="color:red;">*</label>
-                      <input type="text" name="name1" class="form-control">
+                      <input type="text" name="name1" placeholder="Last Name" class="form-control">
                     </div>
                   </div>
                   <div id="hidedivemail" class="d-flex flex-row align-items-center mb-0">
                     <div class="form-outline flex-fill mb-2">
-                      <label class="form-label" for="form3Example1c" style="color:green;"> Email Id</label><label class="form-label" for="form3Example1c" id="hide2"  style="color:red;">* <span id="output2" style="color: brown;"></span></label> 
-                      <input type="email" name="username" id="hide1" oninput="displayInput2()" class="form-control" placeholder="Email Id">
+                      <label class="form-label" for="form3Example1c" style="color:green;"> Email Id</label><label class="form-label" for="form3Example1c"  style="color:red;">*</label><p id="output2" style="color: brown;"></p>
+                      <input type="email" name="username" placeholder="Email Id" id="hide1" oninput="displayInput2()" class="form-control" placeholder="Email Id">
                     </div>&#160 &#160
                     <div class="form-outline flex-fill mb-2">
-                      <label class="form-label" for="form3Example1c" style="color:green;"> Confirm Email Id</label><label class="form-label"id="hide5" for="form3Example1c" style="color:red;">*<span id="output3" style="color: brown;"></span> </label>
-                      <input type="email" name="emailid" id="email"  oninput="displayInput3()" class="form-control" placeholder="Retype Email Id">
+                      <label class="form-label" for="form3Example1c" style="color:green;"> Confirm Email Id</label><label class="form-label"id="hide5" for="form3Example1c" style="color:red;">*</label><p id="output3" style="color: brown;"></p>
+                      <input type="email" name="emailid" id="email"  placeholder="Confirm Email Id" oninput="displayInput3()" class="form-control" placeholder="Retype Email Id">
                     </div>
                     </div>
 
@@ -383,19 +378,54 @@ function Generate() {
                   </div>
                   <p style="color:red"> {{msg}} </p>
                 </form>
-              </div>
-              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-                <img src="{% static 'images/PATEL_LOGO.png' %}" class="img-fluid" alt="Sample image">
                 <input type="text" id="otprec" value="12356" class="display-block" readonly="readonly" style="color:white; width: 1px; border: 0px solid white;">
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
+</div>
+<script>
+  const myInput = document.getElementById('txtCompare');
+
+  // Disable paste
+  myInput.addEventListener('paste', function(e) {
+    e.preventDefault();
+    alert('Pasting is disabled in this field.');
+  });
+
+  // Disable copy
+  myInput.addEventListener('copy', function(e) {
+    e.preventDefault();
+    alert('Copying is disabled in this field.');
+  });
+
+  // Disable cut (optional)
+  myInput.addEventListener('cut', function(e) {
+    e.preventDefault();
+    alert('Cutting is disabled in this field.');
+  });
+</script>
+
+
+<script>
+  const myInput2 = document.getElementById('email');
+
+  // Disable paste
+  myInput2.addEventListener('paste', function(e) {
+    e.preventDefault();
+    alert('Pasting is disabled in this field.');
+  });
+
+  // Disable copy
+  myInput2.addEventListener('copy', function(e) {
+    e.preventDefault();
+    alert('Copying is disabled in this field.');
+  });
+
+  // Disable cut (optional)
+  myInput2.addEventListener('cut', function(e) {
+    e.preventDefault();
+    alert('Cutting is disabled in this field.');
+  });
+</script>
+
 
 {% endblock content %}
 {% block mainbody %} {% endblock %}

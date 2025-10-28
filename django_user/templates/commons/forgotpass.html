@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %}Password Reset{% endblock title %}
 {% block forgot %}  {% endblock %}
+{% block default %}{% endblock %}
 {% block content %} 
 {% if request.user.is_authenticated %}
 <h1> You have already logged in</h1>
@@ -203,88 +204,104 @@ function Generate() {
             document.getElementById("txtCaptcha").value = captchaCode  
         } 
     </script>  
-<br>
-      <div class="container-fluid">
+<script type="text/javascript">
+   document.addEventListener('DOMContentLoaded', function() {
+        const refreshBtn = document.getElementById('refreshButton');
+
+        function handleClick() {
+            window.location.reload();
+        }
+
+        refreshBtn.addEventListener('click', handleClick);
+    });
+
+</script>
+
+
+
 <body onload="Generate();">
-  <div class="container p-1">
-    <div class="row d-flex justify-content-center align-items-center">
-      <div class="col-lg-12 col-xl-11">
-        <div class="card text-black" style="border-radius: 25px;">
-          <div class="card-body p-md-1">
-            <div class="row justify-content-center">
-              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                <p class="text-center h1 fw-bold mb-1 mx-1 mx-md-1 mt-1 pb-2" style="color: red;">Reset Your Password</p>
-                <form name="f1" action="resetpass" method="POST" enctype="multipart/form-data" onsubmit="return validation();" class="mx-1 mx-md-4">
-                  {% csrf_token %}
-                  <div id="hidedivemail" class="d-flex flex-row align-items-center mb-0">
-                    <div class="form-outline flex-fill mb-2">
-                      <label class="form-label" id="hide1" for="form3Example1c" style="color:green;"> Email Id</label>
-                      <label class="form-label" for="form3Example1c" id="hide2"  style="color:red;">*</label> <span id="output" style="color: brown;"></span>
-                      <input type="email" name="emailid1" id="email" oninput="displayInput()" class="form-control">
-                    </div>&#160 &#160
-                    </div>
-
-                    <div class="d-flex flex-row align-items-center mb-0">
-                    <div class="form-outline flex-fill mb-2">
-                      <label class="form-label" for="form3Example1c" style="color:green;">Password</label><label class="form-label" for="form3Example1c" style="color:red;">*</label>
-                      <input type="password" name="password1" id="pwd" onkeyup="validatePassword(this.value);" class="form-control">
-                    </div> &#160 &#160
-                    <div class="form-outline flex-fill mb-2">
-                      <label class="form-label" for="form3Example1c" style="color:green;">Confirm Password</label><label class="form-label" for="form3Example1c" style="color:red;">*</label>
-                      <input type="password" name="password" class="form-control">
-                    </div>
-                  </div>
-                  <div class="d-flex flex-row align-items-center mb-0">
-                    <div class="form-outline flex-fill mb-0">
-                      <spna class="form-label" for="form3Example1c" id="msg"></span>
-                    </div>
-                  </div>
-                  
-                   
-                    <div class="d-flex flex-row align-items-center mb-0">
-                    <div class="form-outline flex-fill mb-2">
-                       <label class="form-label" for="form3Example1c" id="otpresult" style="color:red;"> </label><label class="form-label" for="form3Example1c" style="color:red;">&#160</label>
-                     <input type="buton" class="btn btn-outline-danger rounded rounded-4 p-1" onclick="send(); displayInput();" style=" font-size:15px;" type="button" id="otpbtn" readonly="readonly" onclick="blockemail();" value="Generate OTP">                 
-                    </div> &#160 &#160
-                    <div class="form-outline flex-fill mb-2">
-                      <label class="form-label" for="form3Example1c"style="color:green;">Enter OTP</label><label class="form-label" for="form3Example1c" style="color:red;">*</label>
-                      <input type="text" name="otp" class="form-control">
-                    </div>
-                  </div>
-
-                  <!-----Captcha------>  
-                   <div class="d-flex flex-row align-items-center">
-                    <div class="form-outline flex-fill mb-2">
-                      <label class="form-label" for="form3Example1c"style="color:green;"></label><label class="form-label" for="form3Example1c" style="color:red;">&#160</label>
-                      <label class="form-label" for="form3Example1c"style="color:green;">CAPTCHA CODE</label>
-                      <a href="#"><input type="text" id="txtCaptcha" style="width:140px; font-size: 30px; font-weight:bolder; background-color: black; color:white;" class="form-control unselectable" readonly="readonly"> </a>                 
-                    </div> &#160 &#160
-                    <div class="form-outline flex-fill mb-2 mt-4">
-                      <imput tyle="button" class="btn btn-outline-success rounded rounded-4" id="btn" onclick="Generate();">Refresh
-                    </div>
-                    <div class="form-outline flex-fill mb-2">
-                      <label class="form-label" for="form3Example1c"style="color:green; margin-left: 20%;">Enter CAPTCHA</label><label class="form-label" for="form3Example1c" style="color:red;">*</label>
-                      <input type="text" id="txtCompare" style="width:80%; margin-left: 20%;" class="form-control">
-                    </div>
-                  </div>
-                      <div class="form-outline flex-fill mb-2">
-                      <input class="btn bg-danger rounded rounded-4 mb-2" type="submit" value="Submit" style="margin-top: 40px;">    
-                    </div>
-                  <p style="color:red"> {{msg}} </p>
-                </form>
-              </div>
-              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-                <img src="{% static 'images/PATEL_LOGO.png' %}" style="height:150px;" class="img-fluid" alt="Sample image">
-                <input type="text" id="otprec" value="12356" class="display-block" readonly="readonly" style="color:white; width: 1px; border: 0px solid white;">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="container bg-white rounded rounded-5" style="width:400px;">
+  <a onclick="history.back()" style="border: none ;width: 1px"><img src="{% static 'img/animated-icon-backward_2.gif' %}" height="45px"></a>
+  
+  <a href="" id="refreshButton"><i class="fa fa-spinner faa-spin faa-reverse animated" style="font-size: 2em;color: red; margin-left: 20%;"></i></a>
+ <form name="f1" action="resetpass" method="POST" enctype="multipart/form-data" onsubmit="return validation();" class="mx-1 mx-md-4">
+  {% csrf_token %}
+  <!-- Email input -->
+  <div data-mdb-input-init class="form-outline form-group">
+       <span id="output" style="color: brown;"></span>
+      <input type="email" placeholder="Enter Email Id" name="emailid1" id="email" oninput="displayInput()" class="form-control">
   </div>
-</div>
-{% endif %}
 
+  <!-- Password input 1 -->
+   <div data-mdb-input-init class="form-outline  form-group ">
+     
+      <input type="password" name="password1" id="pwd" placeholder="Enter Password" onkeyup="validatePassword(this.value);" class="form-control">
+       </div>
+
+  <!-- Password input2 -->
+   <div data-mdb-input-init class="form-outline form-group ">
+     
+      <input type="password" placeholder="Confirm Password" name="password" class="form-control">
+      <spna class="form-label" for="form3Example1c" id="msg"></span>
+       </div>
+
+  <!-- Gemerate otp and enter -->
+   <div data-mdb-input-init class="form-outline form-group p-0 m-0">
+    <p style="color:red;" class="form-label" for="form3Example1c" id="otpresult"></p>
+    <table>
+      <tr>
+        <td> <button  class="btn btn-outline-danger rounded rounded-4 m-0 p-0" onclick="send(); displayInput();" style=" font-size:15px;" type="button" id="otpbtn" readonly="readonly" onclick="blockemail();">Generate OTP</button></td>
+            <td><input type="text" name="otp" placeholder="Enter OTP" maxlength="6" style="width:120px; float: right; text-align: center;" class="form-control"></td>
+      </tr>
+    <tr>
+      <td>
+         <a href="#"><input type="text" id="txtCaptcha" style="width:60%; font-size: 30px; font-weight:bolder; background-color: black; color:white;" class="form-control unselectable" readonly="readonly"></a>
+      </td>
+      <td>
+        <input type="text" id="txtCompare" class="form-control unselectable" placeholder="Enter CAPTCHA" maxlength="6" style="width: 120px; text-align: center; margin-bottom: 10px;" class="form-control">
+      </td>
+    </tr>
+
+  <!-- Submit button -->
+      <tr>
+        <td><imput type="buton" class="btn btn-outline-danger rounded rounded-4" id="btn" onclick="Generate();">Refresh</td>
+        <td style="align-items: right;">
+          <input type="submit" value="Submit" class="btn btn-primary btn-block"></td>
+      </tr>
+    </table>
+</div>
+<input type="text" id="otprec" value="12356" class="display-block" readonly="readonly" style="color:white; width: 1px; border: 0px solid white;">
+</form>
+  <!-- Register buttons -->
+  <div class="text-center">
+  I have a password <a href="{% url 'login' %}" style="color:red;">Login</a>
+  <p style="color:red"> {{msg}} </p>
+  
+</div>
+</div>
+
+<script>
+  const myInput = document.getElementById('txtCompare');
+
+  // Disable paste
+  myInput.addEventListener('paste', function(e) {
+    e.preventDefault();
+    alert('Pasting is disabled in this field.');
+  });
+
+  // Disable copy
+  myInput.addEventListener('copy', function(e) {
+    e.preventDefault();
+    alert('Copying is disabled in this field.');
+  });
+
+  // Disable cut (optional)
+  myInput.addEventListener('cut', function(e) {
+    e.preventDefault();
+    alert('Cutting is disabled in this field.');
+  });
+</script>
+
+{% endif %}
 {% endblock content %}
 {% block mainbody %} {% endblock %}

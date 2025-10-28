@@ -210,7 +210,7 @@ def sendmail(email,otp):
         message ="""<html><body><h1 style='color:red'>PATEL JAN KALYAN SEVA SAMITI</h1> <hr>Hello Mr. {0},<br><br>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         Please enter otp to complete your registration <b><br><br>
-        Your OTP is :- <span style='color:red'>  {1} </spna> </b> please don't share to anyone.<br>
+        Your OTP is :-<span style='color:red'>  {1} </spna> </b> please don't share to anyone.<br>
         <br><b> Thanks<br><br> Patel Jan Kalyan Seva Samiti <br>  Head Office Dehri </b></body></html>""".format(email,otp)
         smtp = smtplib.SMTP(host='smtp.gmail.com', port=587)
         smtp.starttls()
@@ -251,7 +251,7 @@ def forgotsendmail(email,otp):
         message ="""<html><body><h1 style='color:red'>PATEL JAN KALYAN SEVA SAMITI</h1> <hr>Hello Mr. {0},<br><br>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         Please enter otp to reset your password <b><br><br>
-        Your OTP is :- <span style='color:red'>  {1} </spna> </b> please don't share to anyone.<br>
+        Your OTP is :-<span style='color:red'>  {1} </spna> </b> please don't share to anyone.<br>
         <br><b> Thanks<br><br> Patel Jan Kalyan Seva Samiti <br>  Head Office Dehri </b></body></html>""".format(email,otp)
         smtp = smtplib.SMTP(host='smtp.gmail.com', port=587) 
         smtp.starttls()

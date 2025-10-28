@@ -2,51 +2,50 @@
 {% load static %}
 {% block title %}Login{% endblock title %}
 {% block forgot %}  {% endblock %}
+{% block default %}  {% endblock %}
 {% block content %}
-<br>
-       <div class="container p-1">
-        <div class="row d-flex justify-content-center align-items-center">
-        <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-        <div class="card text-black" style="border-radius: 25px;">
-          <div class="card-body p-md-1">
-            <div class="row justify-content-center">
-              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                <span style="font-size:30px; color:green; font-weight:bolder; margin-left: 20px;">Login Here!</span>
-                  <div class="d-flex flex-row align-items-center mb-1">
-                    <form method="post">
-                     {% csrf_token %}
-                    <div class="form-outline flex-fill mb-1" style="margin-left: 20px;">
-                      <label class="form-label" for="form3Example1c" style="color:green;">Email Id</label> <label class="form-label" for="form3Example1c" style="color:red;">*</label><br>
-                      {{form.username}}
-                    </div>
-                  </div>
-                  <div class="d-flex flex-row align-items-center mb-1" style="margin-left: 20px;">
-                    <div class="form-outline flex-fill mb-0">
-                      <label class="form-label" for="form3Example1c"style="color:green;">Password</label><label class="form-label" for="form3Example1c" style="color:red;">*</label><br>
-                      
-                      {{form.password}}
-               
-                    </div>
-                  </div>
-                 <div class="d-flex justify-content-left" style="margin-left: 40px;"> 
-                  <button class="btn btn-outline-danger m-2"> Login </button>
-                </div>
-                </form>
-                <a href="{% url 'signup' %}" id="btn" style="font-size:15px; color:orange; background: none; border: none; margin-left: 10px;">New User! Click Here <br>
-                  <span> <a style="font-size:15px; color:red; margin-left: 10px;" href="{% url 'forgotpass' %}">Forgot Password</a></span>
-                </a>
-                <br>
-              </div>
-              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-                <img src="{% static 'images/PATEL_LOGO.png' %}" class="img-fluid rounded-2" alt="Sample image" style="width: 200px;">
-              </div>
+
+ <div class="container bg-white rounded rounded-5" style="width:400px;">
+   <a  onclick="history.back()"><img src="{% static 'img/animated-icon-backward_2.gif' %}" height="45px"></a>
+<form method="post">
+  {% csrf_token %}
+  <!-- Email input -->
+  <div data-mdb-input-init class="form-outline mb-4 form-group">
+       <label class="form-label pt-3" for="{{ form.username.id_for_label }}" for="form2Example1" style="color:green;">Email Id</label> <label class="form-label" for="form3Example1c" style="color:red;">*</label><br>
+          {{form.username}}
+          </div>
+
+  <!-- Password input -->
+   <div data-mdb-input-init class="form-outline mb-4 form-group">
+     <label class="form-label" for="{{ form.password.id_for_label }}" style="color:green;">Password</label><label class="form-label" for="form3Example1c" style="color:red;">*</label><br>
+       {{form.password}}
        </div>
+
+  <!-- 2 column grid layout for inline styling -->
+  <div class="row mb-4">
+    <div class="col d-flex justify-content-center">
+      <!-- Checkbox -->
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+        <label class="form-check-label" for="form2Example31"> Remember me </label>
+      </div>
+</div>
+    <div class="col">
+      <!-- Simple link -->
+      <a href="{% url 'forgotpass' %}" style="color:blue;">Forgot password?</a>
     </div>
   </div>
+  <!-- Submit button -->
+  <div class="bg-light rounded rounded-5">
+  <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block">Sign in</button>
+</div>
+</form>
+  <!-- Register buttons -->
+  <div class="text-center">
+  Not a member? <a href="{% url 'signup' %}" style="color:red;">Register/Signup</a>
+  
 </div>
 </div>
-</div>
-<br> <br>
 
 {% endblock content %}
 {% block mainbody %} {% endblock %}
