@@ -8,11 +8,14 @@
   </div>
   <div class="p-2 flex-fill" align="center">
     <span style="font-size: 30px ;color:green; font-family:serif; font-weight: bolder;">PATEL JAN KALYAN SEVA SAMITI <br>पटेल जन कल्याण सेवा समिति<br></span>
-    <span style="color: yellow; font-size: 15px; color: blue;">Add:- AT Patel Asmarak, GT Road Bus Stand Dehri, Ward No-26 Dist-Rohtas, Bihar (821307)</sapn>
   </div>
   <div class="p-2 flex-fill" align="right"><a href="{% static 'images/modnarayanfounder.png' %}"><img src="{% static 'images/modnarayanfounder.png' %}"height="105px" alt="Logo" ></a>
   </div>
   </div>
+   <div  class="m-0 p-0" style="background-color: #f6f7c1; text-align: center;">
+    <span style="color: yellow; font-size: 15px; color: blue;">Add:- AT Patel Asmarak, GT Road Bus Stand Dehri, Ward No-26 Dist-Rohtas, Bihar (821307)</sapn>
+</div>
+
   <div>
   <marquee  direction="left" behavior="scroll" scrollamount="7" onmouseover="this.stop();"onmouseout="this.start();">
     <span style="color:orange;" class="card-text p-0 m-0">Date:- {% now "jS F Y " %} &#160  Day:- {% now "l" %} &#160  Time:- {% now "P " %}    </span >
@@ -25,7 +28,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light" style="font-size:15px ;padding: 5px;">
   <a href="/" class="active navbar-brand" style="font-size:13px;"><i class="fa fa-home faicon " style="color:green;" aria-hidden="true"></i> Home</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+    <span class=""><img src="{% static 'img/Arrows_down_animated.gif' %}" height="30px"></span>
   </button>
 
   <div class="collapse navbar-collapse m-0 p-0" id="navbarSupportedContent">
@@ -58,7 +61,7 @@
          {% if user.role == "Admin" %}
 
         <a href="addserialno" class="dropdown-item " style="color:black; font-size:13px;" >Letter Serial No</a>
-        <a href="https://pjkss.pythonanywhere.com/pateladmin" class="dropdown-item" style="color:red; font-size:13px;" target="_blank">Admin Console</a>
+        <a href="pateladmin" class="dropdown-item" style="color:red; font-size:13px;" target="_blank">Admin Console</a>
     {% endif %}
     <!------- End Admin Login---->
      
