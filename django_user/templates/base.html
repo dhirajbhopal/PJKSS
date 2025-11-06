@@ -40,6 +40,8 @@
        <a class="navbar-brand" style="font-size:15px" href="{% url 'vision' %}">Vision</a></li>
       <li class="nav-item">
        <a class="navbar-brand" style="font-size:15px" href="{% url 'about' %}">About Us</a></li>
+        <li class="nav-item">
+       <a class="navbar-brand" style="font-size:15px;;color:red;" href="donationdetail">Donate</a></li>
       {% if request.user.is_authenticated %}
         <!-------Start Authetication User Login---->
      
@@ -124,9 +126,8 @@
          <hr>
         <marquee behavior="scroll" direction="up" scrollamount="2"  height="150" onmouseover="this.stop();"onmouseout="this.start();">
           {% for i in dataupdate %}
-         
           <li style="color:black; font-size: 20px;">
-           <span style="color:red; font-size: 25px"> * </span>{{i.topic}}
+           <span style="color:red; font-size: 25px"> * </span>{{i.topic}}</a>
           </li> 
           <br>
     
@@ -562,6 +563,11 @@
         <a href="/gallery2"> <button class="btn btn-outline-danger rounded-4">31-Jan-2025 More Images
         <img src="{% static 'images/31jan_BrahmanBhoj/1.jpg' %}" height="50px;" width="80px"class="rounded-4">
         <img src="{% static 'images/31jan_BrahmanBhoj/21.jpg' %}" height="50px;" width="80px"class="rounded-4">
+      </button> </a>
+
+       <a href="/gallery3"> <button class="btn btn-outline-danger rounded-4">Patel Jayanti_2025 More Images
+        <img src="{% static 'images/31-Oct-25_Patel Jyanti/1.jpeg' %}" height="50px;" width="50px"class="rounded-4">
+        <img src="{% static 'images/31-Oct-25_Patel Jyanti/26.jpeg' %}" height="50px;" width="50px"class="rounded-4">
       </button> </a>
     </div>
   </div>

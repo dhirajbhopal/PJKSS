@@ -395,6 +395,9 @@ def gallery1(req):
 def gallery2(req):
     return render(req,'gallery2.html')
 
+def gallery3(req):
+    return render(req,'gallery3.html')
+
 def donate(req):
     return render(req,'donate.html')
 
