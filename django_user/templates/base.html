@@ -125,14 +125,15 @@
         <h2 style="color: red;"> <i style="color:darkred;" class="fa fa-bullhorn" aria-hidden="true"></i> News & Committee Updates 
          <hr>
         <marquee behavior="scroll" direction="up" scrollamount="2"  height="150" onmouseover="this.stop();"onmouseout="this.start();">
-          {% for i in dataupdate %}
-          <li style="color:black; font-size: 20px;">
-           <span style="color:red; font-size: 25px"> * </span>{{i.topic}}</a>
-          </li> 
-          <br>
-    
-    {% endfor %}
+         {% for i in dataupdate %}
+    {% if forloop.first %}
+        <li style="color:black; font-size: 20px;">
+          <span style="color:red; font-size: 25px"> * </span>{{i.topic}} <a style="color:red" href="/gallery3">Photo</a>
+        </li>
+    {% endif %}
+{% endfor %}
   </marquee>
+
 
 <div class="container-fluid">
   <h2 style="color:red">पटेल स्मारक के मुख्य  सदस्य</h2>
