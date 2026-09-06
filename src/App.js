@@ -24,6 +24,7 @@ import Serialnoall from "./Serialnoall";
 import GalleryA from "./GalleryA";
 import GalleryB from "./GalleryB";
 import GalleryC from "./GalleryC";
+import GalleryD from "./GalleryD";
 import Vision from "./Vision";
 import Nopage from "./Nopage";
 axios.defaults.withCredentials = true;
@@ -206,6 +207,11 @@ function App() {
           <Route
             path="gallery3"
             element={<GalleryC />}
+          />
+
+          <Route
+            path="gallery4"
+            element={<GalleryD />}
           />
 
            <Route

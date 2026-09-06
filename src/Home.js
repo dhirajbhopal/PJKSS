@@ -295,7 +295,7 @@ const Home = () => {
           <div className="container-fluid" align="center">
             <a href="/gallery1">
               <button className="btn btn-outline-danger rounded-4 m-2">
-                15-August-2025 More Images <br/>
+                15-August-2025 Images <br/>
                 <span className="m-2">
                 <img src="/images/15-August-25/1.jpeg" height="50px" width="80px" className="rounded-4" alt="event" />
                 </span>
@@ -305,7 +305,7 @@ const Home = () => {
 
             <a href="/gallery2">
               <button className="btn btn-outline-danger rounded-4 m-2">
-                31-Jan-2025 More Images <br/>
+                31-Jan-2025 Images <br/>
                 <span className="m-2">
                 <img src="/images/31jan_BrahmanBhoj/1.jpg" height="50px" width="80px" className="rounded-4" alt="event" />
                 </span>
@@ -315,11 +315,21 @@ const Home = () => {
 
             <a href="/gallery3">
               <button className="btn btn-outline-danger rounded-4">
-                Patel Jayanti_2025 More Images <br/>
+                Patel Jayanti_2025 Images <br/>
                 <span className="m-2">
                 <img src="/images/31-Oct-25_Patel_Jyanti/1.jpeg" height="50px" width="80px" className="rounded-4" alt="event" />
                 </span>
                 <img src="/images/31-Oct-25_Patel_Jyanti/26.jpeg" height="50px" width="80px" className="rounded-4" alt="event" />
+              </button>
+            </a>
+
+            <a href="/gallery4">
+              <button className="btn btn-outline-danger rounded-4 m-2">
+                15-August-2026 Images <br/>
+                <span className="m-2">
+                <img src="/images/15-August-26/1.JPEG" height="50px" width="80px" className="rounded-4" alt="event" />
+                </span>
+                <img src="/images/15-August-26/2.JPEG" height="50px" width="80px" className="rounded-4" alt="event" />
               </button>
             </a>
           </div>

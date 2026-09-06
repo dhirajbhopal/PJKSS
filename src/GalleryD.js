@@ -1,6 +1,6 @@
 import React from "react";
 
-const Gallery3 = () => {
+const Gallery4 = () => {
 
   // IMAGE ARRAY
   const images = [
@@ -36,6 +36,11 @@ const Gallery3 = () => {
     "29.jpeg",
     "30.jpeg",
     "31.jpeg",
+    "32.jpeg",
+    "33.jpeg",
+    "34.jpeg",
+    "35.jpeg",
+    "36.jpeg",
 
   ];
 
@@ -44,6 +49,7 @@ const Gallery3 = () => {
 
     "1.mp4",
     "2.mp4",
+    "3.mp4",
 
   ];
 
@@ -73,7 +79,7 @@ const Gallery3 = () => {
 
           <p className="mb-0">
 
-            Patel Jayanti Celebration
+            Independence Day Celebration
 
           </p>
 
@@ -90,7 +96,7 @@ const Gallery3 = () => {
             }}
           >
 
-            Patel Jayati 31-Oct-2025
+            15-August-2026
 
           </h3>
 
@@ -108,13 +114,13 @@ const Gallery3 = () => {
               >
 
                 <a
-                  href={`/images/31-Oct-25_Patel_Jyanti/${img}`}
+                  href={`/images/15-August-26/${img}`}
                   target="_blank"
                   rel="noreferrer"
                 >
 
                   <img
-                    src={`/images/31-Oct-25_Patel_Jyanti/${img}`}
+                    src={`/images/15-August-26/${img}`}
                     alt={`gallery-${index}`}
                     className="img-fluid rounded-4 shadow-sm"
                     style={{
@@ -155,7 +161,7 @@ const Gallery3 = () => {
                   >
 
                     <source
-                      src={`/images/31-Oct-25_Patel_Jyanti/${video}`}
+                      src={`/images/15-August-26/${video}`}
                       type="video/mp4"
                     />
 
@@ -177,4 +183,4 @@ const Gallery3 = () => {
   );
 };
 
-export default Gallery3;
+export default Gallery4;
