@@ -119,15 +119,6 @@ const Gallery1 = () => {
 
             ))}
 
-            <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR81bNIEaGCzdwl2QV5sIrD4JXpsyk1smkr4psQ6MhDvA8lGy5_6Y4sEyk&s=10"}
-                    className="img-fluid rounded-4 shadow-sm"
-                    style={{
-                      height: "180px",
-                      width: "50%",
-                      objectFit: "cover",
-                    }}
-              />
-
           </div>
 
           {/* VIDEO SECTION */}
