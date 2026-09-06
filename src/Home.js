@@ -327,9 +327,9 @@ const Home = () => {
               <button className="btn btn-outline-danger rounded-4 m-2">
                 15-August-2026 Images <br/>
                 <span className="m-2">
-                <img src="/images/15-August-26/1.JPEG" height="50px" width="80px" className="rounded-4" alt="event" />
+                <img src="/images/15-August-26/1.jpeg" height="50px" width="80px" className="rounded-4" alt="event" />
                 </span>
-                <img src="/images/15-August-26/2.JPEG" height="50px" width="80px" className="rounded-4" alt="event" />
+                <img src="/images/15-August-26/2.jpeg" height="50px" width="80px" className="rounded-4" alt="event" />
               </button>
             </a>
           </div>
